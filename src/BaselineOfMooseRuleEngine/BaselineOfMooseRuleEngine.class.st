@@ -1,8 +1,8 @@
 Class {
 	#name : 'BaselineOfMooseRuleEngine',
 	#superclass : 'Object',
-	#category : 'MooseRuleEngine',
-	#package : 'MooseRuleEngine'
+	#category : 'BaselineOfMooseRuleEngine',
+	#package : 'BaselineOfMooseRuleEngine'
 }
 
 { #category : 'baselines' }
