@@ -54,7 +54,7 @@ BaselineOfMooseRuleEngine >> definePackages: spec [
 	spec
 		package: 'MooseRuleEngine'
 		with: [ spec requires: #( 'LLMAPI' 'SonarqubePharoAPI'
-		   'FASTJava' 'FASTTypescript' ) ].
+		   'FASTJava' ) ].
 	spec
 		package: 'MooseRuleEngine-Tests'
 		with: [ spec requires: #( 'MooseRuleEngine' 'Mocketry' ) ]
