@@ -1,36 +1,37 @@
 Class {
-	#name : #MREViolation,
-	#superclass : #Object,
+	#name : 'MREViolation',
+	#superclass : 'Object',
 	#instVars : [
 		'rule',
 		'entities'
 	],
-	#category : #MooseRuleEngine
+	#category : 'MooseRuleEngine',
+	#package : 'MooseRuleEngine'
 }
 
-{ #category : #adding }
+{ #category : 'adding' }
 MREViolation >> addEntity: entity [
 	entities add: entity
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MREViolation >> entities [
 
 	^ entities
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MREViolation >> initialize [ 
 	entities := OrderedCollection new.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MREViolation >> rule [
 
 	^ rule
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MREViolation >> rule: anObject [
 
 	rule := anObject

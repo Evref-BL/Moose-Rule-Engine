@@ -1,16 +1,17 @@
 Class {
-	#name : #MREFix,
-	#superclass : #Object,
+	#name : 'MREFix',
+	#superclass : 'Object',
 	#instVars : [
 		'startPos',
 		'endPos',
 		'content',
 		'file'
 	],
-	#category : #MooseRuleEngine
+	#category : 'MooseRuleEngine',
+	#package : 'MooseRuleEngine'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MREFix >> applyOnFile [
 
 	| before after |
@@ -25,49 +26,49 @@ MREFix >> applyOnFile [
 	^ before , content , after
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MREFix >> content [
 
 	^ content
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MREFix >> content: anObject [
 
 	content := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MREFix >> endLine [
 
 	^ file content lineNumberCorrespondingToIndex: endPos
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MREFix >> endPos [
 
 	^ endPos
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MREFix >> endPos: anObject [
 
 	endPos := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MREFix >> file [
 
 	^ file
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MREFix >> file: anObject [
 
 	file := anObject
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MREFix >> newLines [
 	| newFile startLine endLine lines |
 	content = '' ifTrue: [ ^ '' ].
@@ -88,19 +89,19 @@ MREFix >> newLines [
 					               Character lf asString } ].
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MREFix >> startLine [
 
 	^ file content lineNumberCorrespondingToIndex: startPos
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MREFix >> startPos [
 
 	^ startPos
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MREFix >> startPos: anObject [
 
 	startPos := anObject

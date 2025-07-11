@@ -14,78 +14,79 @@ This class belongs to the MooseRuleEngine category and serves as a foundational 
 for managing entities within the rule engine.
 "
 Class {
-	#name : #MREEntity,
-	#superclass : #Object,
+	#name : 'MREEntity',
+	#superclass : 'Object',
 	#instVars : [
 		'file',
 		'startPos',
 		'endPos',
 		'model'
 	],
-	#category : #MooseRuleEngine
+	#category : 'MooseRuleEngine',
+	#package : 'MooseRuleEngine'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MREEntity >> endLine [
 
 	^ file content lineNumberCorrespondingToIndex: endPos
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MREEntity >> endPos [
 
 	^ endPos
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MREEntity >> endPos: anObject [
 
 	endPos := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MREEntity >> file [
 
 	^ file
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MREEntity >> file: anObject [
 
 	file := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MREEntity >> model [
 
 	^model
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MREEntity >> model: anObject [
 
 	model := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MREEntity >> startLine [
 
 	^ file content lineNumberCorrespondingToIndex: startPos
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MREEntity >> startPos [
 
 	^ startPos
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MREEntity >> startPos: anObject [
 
 	startPos := anObject
 ]
 
-{ #category : #evaluating }
+{ #category : 'evaluating' }
 MREEntity >> value [
 	^file content copyFrom: startPos to: endPos.
 ]

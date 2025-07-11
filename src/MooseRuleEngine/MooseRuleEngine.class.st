@@ -1,22 +1,23 @@
 Class {
-	#name : #MooseRuleEngine,
-	#superclass : #Object,
+	#name : 'MooseRuleEngine',
+	#superclass : 'Object',
 	#instVars : [
 		'rules',
 		'files',
 		'helpers',
 		'model'
 	],
-	#category : #MooseRuleEngine
+	#category : 'MooseRuleEngine',
+	#package : 'MooseRuleEngine'
 }
 
-{ #category : #adding }
+{ #category : 'adding' }
 MooseRuleEngine >> addHelper: helper [
 
 	helpers add: helper.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MooseRuleEngine >> detect [
 	| violations |
 	violations := rules collect: [ :rule |
@@ -27,7 +28,7 @@ MooseRuleEngine >> detect [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MooseRuleEngine >> detectAndFix [
 
 	| violations |
@@ -36,19 +37,19 @@ MooseRuleEngine >> detectAndFix [
 	^ self fix: violations
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseRuleEngine >> files [
 
 	^ files
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseRuleEngine >> files: anObject [
 
 	files := anObject
 ]
 
-{ #category : #'fix - static' }
+{ #category : 'fix - static' }
 MooseRuleEngine >> fix: violations [
 
 	^violations collect: [ :violation |
@@ -57,13 +58,13 @@ MooseRuleEngine >> fix: violations [
 		violation -> fixes ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseRuleEngine >> helpers [
 
 	^ helpers
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MooseRuleEngine >> initialize [
 
 	rules := OrderedCollection new.
@@ -71,29 +72,29 @@ MooseRuleEngine >> initialize [
 	helpers := OrderedCollection new.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseRuleEngine >> model [
 	^model
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseRuleEngine >> model: aModel [
 	model := aModel 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseRuleEngine >> rules [
 
 	^ rules
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseRuleEngine >> rules: anObject [
 
 	rules := anObject
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MooseRuleEngine >> setFiles: mreFiles [
 
 	files := mreFiles collect: [ :file |
@@ -101,21 +102,21 @@ MooseRuleEngine >> setFiles: mreFiles [
 			         [ file model: (MREParser new parse: file) ] ifNotNil: [ file ] ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MooseRuleEngine >> setHelpers: mreHelpers [
 
 	helpers := helpers removeAll.
 	mreHelpers do: [ :helper | self addHelper: helper ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MooseRuleEngine >> setModel: mooseModel [
 	model := mooseModel.
 	
 	rules do: [ :rule | rule model: model ].
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MooseRuleEngine >> setRules: mreRules [
 
 	rules := mreRules collect: [ :rule | 

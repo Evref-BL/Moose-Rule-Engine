@@ -9,47 +9,48 @@ Instance Variables:
 - model: The associated model or structure.
 "
 Class {
-	#name : #MREFile,
-	#superclass : #Object,
+	#name : 'MREFile',
+	#superclass : 'Object',
 	#instVars : [
 		'path',
 		'content',
 		'model'
 	],
-	#category : #MooseRuleEngine
+	#category : 'MooseRuleEngine',
+	#package : 'MooseRuleEngine'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MREFile >> content [
 
 	^ content
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MREFile >> content: anObject [
 
 	content := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MREFile >> model [
 
 	^ model
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MREFile >> model: anObject [
 
 	model := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MREFile >> path [
 
 	^ path
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MREFile >> path: anObject [
 
 	path := anObject

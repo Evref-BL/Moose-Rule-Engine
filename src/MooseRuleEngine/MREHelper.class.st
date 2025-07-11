@@ -1,10 +1,11 @@
 Class {
-	#name : #MREHelper,
-	#superclass : #Object,
-	#category : #MooseRuleEngine
+	#name : 'MREHelper',
+	#superclass : 'Object',
+	#category : 'MooseRuleEngine',
+	#package : 'MooseRuleEngine'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MREHelper >> name [
 	^self subclassResponsibility 
 ]

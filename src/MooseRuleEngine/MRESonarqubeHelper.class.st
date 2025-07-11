@@ -1,6 +1,6 @@
 Class {
-	#name : #MRESonarqubeHelper,
-	#superclass : #MREHelper,
+	#name : 'MRESonarqubeHelper',
+	#superclass : 'MREHelper',
 	#instVars : [
 		'projectKey',
 		'sonarqubeApi',
@@ -8,10 +8,11 @@ Class {
 		'mergeRequestId',
 		'sourcePath'
 	],
-	#category : #MooseRuleEngine
+	#category : 'MooseRuleEngine',
+	#package : 'MooseRuleEngine'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MRESonarqubeHelper >> allViolationsOf: rule inFile: file usingRuleId: ruleId [
 
 	| params issues |
@@ -26,19 +27,19 @@ MRESonarqubeHelper >> allViolationsOf: rule inFile: file usingRuleId: ruleId [
 		  self parseIssueIntoViolation: issue ofRule: rule inFile: file ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MRESonarqubeHelper >> mergeRequestId: anObject [
 
 	mergeRequestId := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MRESonarqubeHelper >> name [
 
 	^ 'sonarqube'
 ]
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 MRESonarqubeHelper >> parseIssueIntoViolation: issue ofRule: rule inFile: file [
 
 	| textRange violation flows |
@@ -62,7 +63,7 @@ MRESonarqubeHelper >> parseIssueIntoViolation: issue ofRule: rule inFile: file [
 	^ violation
 ]
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 MRESonarqubeHelper >> parseTextRangeIntoEntity: textRange ofFile: file [
 
 	| indexesStartLine indexesEndLine entityStartPos entityEndPos |
@@ -83,31 +84,31 @@ MRESonarqubeHelper >> parseTextRangeIntoEntity: textRange ofFile: file [
 		  endPos: entityEndPos
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MRESonarqubeHelper >> projectKey: anObject [
 
 	projectKey := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MRESonarqubeHelper >> sonarqubeApi: anObject [
 
 	sonarqubeApi := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MRESonarqubeHelper >> sourcePath: anObject [
 
 	sourcePath := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MRESonarqubeHelper >> type: anObject [
 
 	type := anObject
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MRESonarqubeHelper >> violationsInMergeRequestOf: rule inFile: file usingRuleId: ruleId [
 
 	| params issues |
@@ -124,7 +125,7 @@ MRESonarqubeHelper >> violationsInMergeRequestOf: rule inFile: file usingRuleId:
 		  self parseIssueIntoViolation: issue ofRule: rule inFile: file ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MRESonarqubeHelper >> violationsOf: rule inFile: file usingRuleId: ruleId [
 
 	type = 'mergeRequest' ifTrue: [

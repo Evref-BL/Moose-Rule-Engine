@@ -1,19 +1,20 @@
 Class {
-	#name : #MRELLMHelper,
-	#superclass : #MREHelper,
+	#name : 'MRELLMHelper',
+	#superclass : 'MREHelper',
 	#instVars : [
 		'llmApi'
 	],
-	#category : #MooseRuleEngine
+	#category : 'MooseRuleEngine',
+	#package : 'MooseRuleEngine'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MRELLMHelper >> basePrompt [
 
 	^'You can only answer with code. You can not talk ! Only give me the code in a simple code block without any explanation like that : ``` the modified code ```. Do not add comment in the code. Keep existing comment. Keep the same indentation and format'
 ]
 
-{ #category : #utilities }
+{ #category : 'utilities' }
 MRELLMHelper >> cleanLLMOutput: output [
 
 	| cleanOutput |
@@ -28,7 +29,7 @@ MRELLMHelper >> cleanLLMOutput: output [
 	^ cleanOutput trim
 ]
 
-{ #category : #'fix - static' }
+{ #category : 'fix - static' }
 MRELLMHelper >> fix: violation [
 
 	| entities |
@@ -59,7 +60,7 @@ MRELLMHelper >> fix: violation [
 			  content: answer ]
 ]
 
-{ #category : #'fix - static' }
+{ #category : 'fix - static' }
 MRELLMHelper >> fix: string withMessage: message [
 	
 	| prompt answer |
@@ -80,19 +81,19 @@ MRELLMHelper >> fix: string withMessage: message [
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MRELLMHelper >> llmApi [
 
 	^ llmApi
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MRELLMHelper >> llmApi: anObject [
 
 	llmApi := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MRELLMHelper >> name [
 
 	^ 'llm'

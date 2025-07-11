@@ -1,10 +1,11 @@
 Class {
-	#name : #MREParser,
-	#superclass : #Object,
-	#category : #MooseRuleEngine
+	#name : 'MREParser',
+	#superclass : 'Object',
+	#category : 'MooseRuleEngine',
+	#package : 'MooseRuleEngine'
 }
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 MREParser >> parse: file [
 
 	| extension |
@@ -25,14 +26,14 @@ MREParser >> parse: file [
 	^ nil
 ]
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 MREParser >> parseJava: file [
 	^ JavaSmaCCProgramNodeImporterVisitor new
 			  withComments;
 			  parseCodeString: file content
 ]
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 MREParser >> parseTS: file [
 
 	^ FASTTypescriptParser new getASTFromString: file content
