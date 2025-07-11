@@ -1,0 +1,21 @@
+"
+A MREViolationTest is a test class for testing the behavior of MREViolation
+"
+Class {
+	#name : #MREViolationTest,
+	#superclass : #TestCase,
+	#category : #'MooseRuleEngine-Tests'
+}
+
+{ #category : #tests }
+MREViolationTest >> testAddEntity [
+
+	| entity violation |
+	entity := FASTJavaModel new.
+	
+	violation := MREViolation new.
+	
+	violation addEntity: entity.
+	
+	self assertCollection: violation entities hasSameElements: { entity }  
+]
