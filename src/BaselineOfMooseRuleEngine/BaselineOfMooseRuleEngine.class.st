@@ -1,6 +1,6 @@
 Class {
 	#name : 'BaselineOfMooseRuleEngine',
-	#superclass : 'Object',
+	#superclass : 'BaselineOf',
 	#category : 'BaselineOfMooseRuleEngine',
 	#package : 'BaselineOfMooseRuleEngine'
 }
