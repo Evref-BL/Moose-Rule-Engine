@@ -1,0 +1,17 @@
+SmalltalkCISpec {
+  #loading : [
+    SCIMetacelloLoadSpec {
+      #baseline : 'MooseRuleEngine',
+      #directory : 'src',
+      #ignoreImage : true,
+      #onConflict : #useIncoming,
+      #onUpgrade : #useIncoming
+    }
+  ],
+  #testing : {
+    #coverage : {
+      #packages : [ 'MooseRuleEngine.*' ],
+      #format : #lcov
+    }
+  }
+}
