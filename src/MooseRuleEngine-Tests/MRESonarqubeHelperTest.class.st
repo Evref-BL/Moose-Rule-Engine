@@ -134,16 +134,13 @@ MRESonarqubeHelperTest >> testParseIssueIntoViolationOfRuleInFile [
 { #category : 'tests' }
 MRESonarqubeHelperTest >> testParseTextRangeIntoEntityOfFile [
 
-	| sonarqubeHelper file entity model fileContent textRangeClass |
+	| sonarqubeHelper file entity fileContent textRangeClass |
 	sonarqubeHelper := MRESonarqubeHelper new.
 
 	fileContent := 'class Java {}'.
 	file := MREFile new
 		        path: 'test.java';
 		        content: fileContent.
-
-	model := MREParser new parse: file.
-	file model: model.
 
 	textRangeClass := {
 		                  (#startLine -> 1).
@@ -160,50 +157,6 @@ MRESonarqubeHelperTest >> testParseTextRangeIntoEntityOfFile [
 		assert: entity startPos
 		equals: (textRangeClass at: #startOffset) + 1.
 	self assert: entity endPos equals: (textRangeClass at: #endOffset).
-]
-
-{ #category : 'tests' }
-MRESonarqubeHelperTest >> testParseTextRangeIntoEntityOfFileIfEntityNotFoundInModel [
-
-	| sonarqubeHelper file entity model |
-	sonarqubeHelper := MRESonarqubeHelper new.
-
-
-	file := MREFile new
-		        path: 'test.java';
-		        content: 'class Java {}'.
-
-	model := MREParser new parse: file.
-	file model: model.
-
-	entity := sonarqubeHelper
-		          parseTextRangeIntoEntity: textRange
-		          ofFile: file.
-
-	self assert: entity file equals: file.
-	self assert: entity startPos equals: (textRange at: #startOffset) + 1.
-	self assert: entity endPos equals: (textRange at: #endOffset).
-	self assert: entity model isNil
-]
-
-{ #category : 'tests' }
-MRESonarqubeHelperTest >> testParseTextRangeIntoEntityOfFileIfModelNil [
-
-	| sonarqubeHelper file entity |
-	sonarqubeHelper := MRESonarqubeHelper new.
-
-	file := MREFile new
-		        path: 'test.java';
-		        content: 'class Java {}'.
-
-	entity := sonarqubeHelper
-		          parseTextRangeIntoEntity: textRange
-		          ofFile: file.
-
-	self assert: entity file equals: file.
-	self assert: entity startPos equals: (textRange at: #startOffset) + 1.
-	self assert: entity endPos equals: (textRange at: #endOffset).
-	self assert: entity model isNil
 ]
 
 { #category : 'tests' }
