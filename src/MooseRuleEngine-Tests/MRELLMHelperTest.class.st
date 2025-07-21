@@ -2,16 +2,17 @@
 A MRELLMHelperTest is a test class for testing the behavior of MRELLMHelper
 "
 Class {
-	#name : #MRELLMHelperTest,
-	#superclass : #TestCase,
+	#name : 'MRELLMHelperTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'llmApi',
 		'helper'
 	],
-	#category : #'MooseRuleEngine-Tests'
+	#category : 'MooseRuleEngine-Tests',
+	#package : 'MooseRuleEngine-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 MRELLMHelperTest >> setUp [
 
 	super setUp.
@@ -20,7 +21,7 @@ MRELLMHelperTest >> setUp [
 	helper := MRELLMHelper new llmApi: llmApi
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MRELLMHelperTest >> testCleanLLMOutput [
 
 	| output cleanedOutput |
@@ -34,7 +35,7 @@ MRELLMHelperTest >> testCleanLLMOutput [
 	self assert: cleanedOutput equals: 'test'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MRELLMHelperTest >> testCleanLLMOutputOnCodeBlock [
 
 	| output cleanedOutput |
@@ -48,7 +49,7 @@ MRELLMHelperTest >> testCleanLLMOutputOnCodeBlock [
 	self assert: cleanedOutput equals: 'test'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MRELLMHelperTest >> testCleanLLMOutputOnSingleBackTick [
 
 	| output cleanedOutput |
@@ -62,7 +63,7 @@ MRELLMHelperTest >> testCleanLLMOutputOnSingleBackTick [
 	self assert: cleanedOutput equals: 'test'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MRELLMHelperTest >> testCleanLLMOutputStartWithBacktickJava [
 
 	| output cleanedOutput |
@@ -78,7 +79,7 @@ class HelloWorld { }
 	self assert: cleanedOutput equals: 'class HelloWorld { }'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MRELLMHelperTest >> testCleanLLMOutputStartWithJava [
 
 	| output cleanedOutput |
@@ -93,7 +94,7 @@ class HelloWorld { }'.
 	self assert: cleanedOutput equals: 'class HelloWorld { }'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MRELLMHelperTest >> testFix [
 
 	| rule file entity violation fixes |

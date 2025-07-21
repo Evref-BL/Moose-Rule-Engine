@@ -2,12 +2,13 @@
 A MRERuleTest is a test class for testing the behavior of MRERule
 "
 Class {
-	#name : #MRERuleTest,
-	#superclass : #TestCase,
-	#category : #'MooseRuleEngine-Tests'
+	#name : 'MRERuleTest',
+	#superclass : 'TestCase',
+	#category : 'MooseRuleEngine-Tests',
+	#package : 'MooseRuleEngine-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 MRERuleTest >> testGetHelper [
 
 	| rule helper |

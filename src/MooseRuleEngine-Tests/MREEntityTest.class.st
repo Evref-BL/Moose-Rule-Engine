@@ -2,12 +2,13 @@
 A MREEntityTest is a test class for testing the behavior of MREEntity
 "
 Class {
-	#name : #MREEntityTest,
-	#superclass : #TestCase,
-	#category : #'MooseRuleEngine-Tests'
+	#name : 'MREEntityTest',
+	#superclass : 'TestCase',
+	#category : 'MooseRuleEngine-Tests',
+	#package : 'MooseRuleEngine-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 MREEntityTest >> testEndLine [
 
 	| file entity startLine |
@@ -27,7 +28,7 @@ MREEntityTest >> testEndLine [
 	self assert: startLine equals: 2
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MREEntityTest >> testStartLine [
 
 	| file entity startLine |
@@ -47,7 +48,7 @@ MREEntityTest >> testStartLine [
 	self assert: startLine equals: 2
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MREEntityTest >> testValue [
 
 	| file entity value |

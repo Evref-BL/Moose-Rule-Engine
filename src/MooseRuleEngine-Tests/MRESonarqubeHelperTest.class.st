@@ -2,15 +2,16 @@
 A MRESonarqubeHelperTest is a test class for testing the behavior of MRESonarqubeHelper
 "
 Class {
-	#name : #MRESonarqubeHelperTest,
-	#superclass : #TestCase,
+	#name : 'MRESonarqubeHelperTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'textRange'
 	],
-	#category : #'MooseRuleEngine-Tests'
+	#category : 'MooseRuleEngine-Tests',
+	#package : 'MooseRuleEngine-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 MRESonarqubeHelperTest >> setUp [
 	super setUp.
 
@@ -21,7 +22,7 @@ MRESonarqubeHelperTest >> setUp [
 		             (#endOffset -> 10) } asDictionary.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MRESonarqubeHelperTest >> testAllViolationsOfInFileUsingRuleId [
 
 
@@ -85,7 +86,7 @@ MRESonarqubeHelperTest >> testAllViolationsOfInFileUsingRuleId [
 		self assert: entity model equals: expectedEntity model ]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MRESonarqubeHelperTest >> testParseIssueIntoViolationOfRuleInFile [
 
 	| issue sonarHelper violation rule location1 location2 fileContent file expectedEntity message |
@@ -130,7 +131,7 @@ MRESonarqubeHelperTest >> testParseIssueIntoViolationOfRuleInFile [
 		self assert: entity model equals: expectedEntity model ]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MRESonarqubeHelperTest >> testParseTextRangeIntoEntityOfFile [
 
 	| sonarqubeHelper file entity model fileContent textRangeClass |
@@ -161,7 +162,7 @@ MRESonarqubeHelperTest >> testParseTextRangeIntoEntityOfFile [
 	self assert: entity endPos equals: (textRangeClass at: #endOffset).
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MRESonarqubeHelperTest >> testParseTextRangeIntoEntityOfFileIfEntityNotFoundInModel [
 
 	| sonarqubeHelper file entity model |
@@ -185,7 +186,7 @@ MRESonarqubeHelperTest >> testParseTextRangeIntoEntityOfFileIfEntityNotFoundInMo
 	self assert: entity model isNil
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MRESonarqubeHelperTest >> testParseTextRangeIntoEntityOfFileIfModelNil [
 
 	| sonarqubeHelper file entity |
@@ -205,7 +206,7 @@ MRESonarqubeHelperTest >> testParseTextRangeIntoEntityOfFileIfModelNil [
 	self assert: entity model isNil
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MRESonarqubeHelperTest >> testViolationsInMergeRequestOfInFileUsingRuleId [
 
 	| mergeRequestId rule file ruleId helper violations projectKey sonarqubeApi issue1 issue2 params expectedEntity |
@@ -265,7 +266,7 @@ MRESonarqubeHelperTest >> testViolationsInMergeRequestOfInFileUsingRuleId [
 		self assert: entity model equals: expectedEntity model ]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MRESonarqubeHelperTest >> testViolationsOfInFileUsingRuleId [
 
 	| mergeRequestId rule file ruleId helper violations projectKey violation entity |
@@ -306,7 +307,7 @@ MRESonarqubeHelperTest >> testViolationsOfInFileUsingRuleId [
 		hasSameElements: { entity }
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MRESonarqubeHelperTest >> testViolationsOfInFileUsingRuleIdIfAll [
 
 	| mergeRequestId rule file ruleId helper violations projectKey violation entity |

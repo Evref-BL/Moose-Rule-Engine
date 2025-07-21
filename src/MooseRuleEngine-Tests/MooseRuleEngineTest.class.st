@@ -2,18 +2,19 @@
 A MooseRuleEngineTest is a test class for testing the behavior of MooseRuleEngine
 "
 Class {
-	#name : #MooseRuleEngineTest,
-	#superclass : #TestCase,
+	#name : 'MooseRuleEngineTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'rule1',
 		'ruleEngine',
 		'file1',
 		'file2'
 	],
-	#category : #'MooseRuleEngine-Tests'
+	#category : 'MooseRuleEngine-Tests',
+	#package : 'MooseRuleEngine-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 MooseRuleEngineTest >> setUp [
 
 	super setUp.
@@ -29,7 +30,7 @@ MooseRuleEngineTest >> setUp [
 		         content: 'class Java {}'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseRuleEngineTest >> testAddHelper [
 
 	| helper |
@@ -43,7 +44,7 @@ MooseRuleEngineTest >> testAddHelper [
 		hasSameElements: { helper }
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseRuleEngineTest >> testDetect [
 
 	| violations |
@@ -58,7 +59,7 @@ MooseRuleEngineTest >> testDetect [
 	self assert: violations size equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseRuleEngineTest >> testDetectAndFix [
 
 	| result |
@@ -70,7 +71,7 @@ MooseRuleEngineTest >> testDetectAndFix [
 	self assert: result size equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseRuleEngineTest >> testDetectWithoutFiles [
 
 	| violations |
@@ -81,7 +82,7 @@ MooseRuleEngineTest >> testDetectWithoutFiles [
 	self assert: violations isEmpty
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseRuleEngineTest >> testDetectWithoutRulesOrFiles [
 
 	| violations |
@@ -90,7 +91,7 @@ MooseRuleEngineTest >> testDetectWithoutRulesOrFiles [
 	self assert: violations isEmpty
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseRuleEngineTest >> testFix [
 
 	| violation1 result |
@@ -101,7 +102,7 @@ MooseRuleEngineTest >> testFix [
 	self assert: result size equals: 1.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseRuleEngineTest >> testSetFiles [
 
 	ruleEngine setFiles: {
@@ -111,33 +112,10 @@ MooseRuleEngineTest >> testSetFiles [
 	self assertCollection: ruleEngine files hasSameElements: {
 			file1.
 			file2 }.
-			
-	self assert: file1 model isNotNil.
-		self assert: file2 model isNotNil.
+
 ]
 
-{ #category : #tests }
-MooseRuleEngineTest >> testSetFilesIfModelNotNil [
-
-	| model |
-	model := FASTJavaModel new.
-
-	file1 model: model.
-	file2 model: model.
-
-	ruleEngine setFiles: {
-			file1.
-			file2 }.
-
-	self assertCollection: ruleEngine files hasSameElements: {
-			file1.
-			file2 }.
-			
-	self assert: file1 model equals: model.
-		self assert: file2 model equals: model.
-]
-
-{ #category : #tests }
+{ #category : 'tests' }
 MooseRuleEngineTest >> testSetHelpers [
 
 	| helper1 helper2 helper3 rule |
@@ -163,7 +141,7 @@ MooseRuleEngineTest >> testSetHelpers [
 			helper3 }
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseRuleEngineTest >> testSetModel [
 
 	| model |
@@ -176,7 +154,7 @@ MooseRuleEngineTest >> testSetModel [
 	self assert: rule1 model equals: model.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseRuleEngineTest >> testSetModelSetRuleAfter [
 
 	| model |
@@ -189,7 +167,7 @@ MooseRuleEngineTest >> testSetModelSetRuleAfter [
 	self assert: rule1 model equals: model.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseRuleEngineTest >> testSetRules [
 
 	| helper |

@@ -2,12 +2,13 @@
 A MREFixTest is a test class for testing the behavior of MREFix
 "
 Class {
-	#name : #MREFixTest,
-	#superclass : #TestCase,
-	#category : #'MooseRuleEngine-Tests'
+	#name : 'MREFixTest',
+	#superclass : 'TestCase',
+	#category : 'MooseRuleEngine-Tests',
+	#package : 'MooseRuleEngine-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 MREFixTest >> testApplyOnFile [
 
 	 | file fix result |
@@ -20,7 +21,7 @@ MREFixTest >> testApplyOnFile [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MREFixTest >> testApplyOnFileOnFullReplacement [
 
 	| file fix result |
@@ -36,7 +37,7 @@ MREFixTest >> testApplyOnFileOnFullReplacement [
 	self assert: result equals: 'a'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MREFixTest >> testApplyOnFileOnInsert [
 
 	| file fix result |
@@ -52,7 +53,7 @@ MREFixTest >> testApplyOnFileOnInsert [
 	self assert: result equals: 'abcINSERTdef'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MREFixTest >> testApplyOnFileOnReplacement [
 
 	| file fix result |
@@ -68,7 +69,7 @@ MREFixTest >> testApplyOnFileOnReplacement [
 	self assert: result equals: 'aaaaaaaaaaadefghi'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MREFixTest >> testEndLine [
 
 	| file entity startLine |
@@ -88,7 +89,7 @@ MREFixTest >> testEndLine [
 	self assert: startLine equals: 2
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MREFixTest >> testNewLines [
 
 	| file fix newLines |
@@ -108,7 +109,7 @@ MREFixTest >> testNewLines [
 	self assert: newLines equals: 'bbbbbba', Character lf asString.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MREFixTest >> testStartLine [
 
 	| file entity startLine |

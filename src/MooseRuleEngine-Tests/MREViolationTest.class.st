@@ -2,12 +2,13 @@
 A MREViolationTest is a test class for testing the behavior of MREViolation
 "
 Class {
-	#name : #MREViolationTest,
-	#superclass : #TestCase,
-	#category : #'MooseRuleEngine-Tests'
+	#name : 'MREViolationTest',
+	#superclass : 'TestCase',
+	#category : 'MooseRuleEngine-Tests',
+	#package : 'MooseRuleEngine-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 MREViolationTest >> testAddEntity [
 
 	| entity violation |

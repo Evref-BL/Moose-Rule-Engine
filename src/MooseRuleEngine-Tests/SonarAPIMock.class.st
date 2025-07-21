@@ -1,18 +1,19 @@
 Class {
-	#name : #SonarAPIMock,
-	#superclass : #Object,
+	#name : 'SonarAPIMock',
+	#superclass : 'Object',
 	#instVars : [
 		'issues'
 	],
-	#category : #'MooseRuleEngine-Tests'
+	#category : 'MooseRuleEngine-Tests',
+	#package : 'MooseRuleEngine-Tests'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 SonarAPIMock >> initialize [ 
 	issues := Object new.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SonarAPIMock >> issues [
 
 	^ issues

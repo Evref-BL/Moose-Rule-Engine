@@ -97,9 +97,7 @@ MooseRuleEngine >> rules: anObject [
 { #category : 'initialization' }
 MooseRuleEngine >> setFiles: mreFiles [
 
-	files := mreFiles collect: [ :file |
-		         file model ifNil:
-			         [ file model: (MREParser new parse: file) ] ifNotNil: [ file ] ]
+	files := mreFiles 
 ]
 
 { #category : 'initialization' }
