@@ -45,7 +45,7 @@ MRESonarqubeHelper >> parseIssueIntoViolation: issue ofRule: rule inFile: file [
 	| textRange violation flows |
 	textRange := issue at: #textRange.
 
-	violation := MREViolation new rule: rule.
+	violation := MREViolation new rule: rule class new.
 	violation addEntity:
 		(self parseTextRangeIntoEntity: textRange ofFile: file).
 
