@@ -110,6 +110,67 @@ MREFixTest >> testNewLines [
 ]
 
 { #category : 'tests' }
+MREFixTest >> testNewLinesIfContentEmpty [
+
+	| file fix newLines |
+	file := MREFile new content: 'aaaa bbb aaa
+	aaaa
+	aaaa
+	aaaa'.
+
+	fix := MREFix new
+		       file: file;
+		       startPos: 6;
+		       endPos: 8;
+		       content: 'aaa'.
+
+	newLines := fix newLines.
+
+	self assert: newLines equals: 'aaaa aaa aaa', Character lf asString.
+]
+
+{ #category : 'tests' }
+MREFixTest >> testNewLinesIfLineCreated [
+
+	| file fix newLines |
+	file := MREFile new content: 'aaaa
+	aaaa
+	aaaa
+	aaaa'.
+
+	fix := MREFix new
+		       file: file;
+		       startPos: 1;
+		       endPos: 4;
+		       content: 'bbb
+bbb'.
+
+	newLines := fix newLines.
+
+	self assert: newLines equals: 'bbb', Character lf asString, 'bbb', Character lf asString.
+]
+
+{ #category : 'tests' }
+MREFixTest >> testNewLinesIfLineRemoved [
+
+	| file fix newLines |
+	file := MREFile new content: 'aaaa
+	aaaa
+	aaaa
+	aaaa'.
+
+	fix := MREFix new
+		       file: file;
+		       startPos: 1;
+		       endPos: 4;
+		       content: ''.
+
+	newLines := fix newLines.
+
+	self assert: newLines equals: '', Character lf asString.
+]
+
+{ #category : 'tests' }
 MREFixTest >> testStartLine [
 
 	| file entity startLine |

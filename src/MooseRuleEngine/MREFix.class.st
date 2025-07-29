@@ -70,23 +70,29 @@ MREFix >> file: anObject [
 
 { #category : 'instance creation' }
 MREFix >> newLines [
-	| newFile startLine endLine lines |
-	content = '' ifTrue: [ ^ '' ].
+
+	| newFile startLine endLine lines startLineIndexes endLineIndexes |
+	startLineIndexes := file content indexesOfLine: self startLine.
+	endLineIndexes := file content indexesOfLine: self endLine.
+
+	 ((startLineIndexes at: #start) = startPos and:
+		  ((endLineIndexes at: #end) = endPos and: content = '')) ifTrue: [
+		^ '' ].
+
 	newFile := self applyOnFile.
 
 	startLine := newFile lineNumberCorrespondingToIndex: startPos.
 	endLine := newFile lineNumberCorrespondingToIndex:
 		           startPos + content size.
 
+
 	lines := newFile lines copyFrom: startLine to: endLine.
-	
-		^lines
-		               inject: ''
-		               into: [ :acc :line |
-			               '' join: {
-					               acc.
-					               line.
-					               Character lf asString } ].
+
+	^ lines inject: '' into: [ :acc :line |
+		  '' join: {
+				  acc.
+				  line.
+				  Character lf asString } ]
 ]
 
 { #category : 'accessing' }
