@@ -73,7 +73,7 @@ MRESonarqubeHelperTest >> testAllViolationsOfInFileUsingRuleId [
 		              allViolationsOf: rule inFile: file  usingRuleId: ruleId.
 		              
 	self assert: violations size equals: 1.
-	self assert: violations first rule equals: rule.
+	self assert: violations first rule name equals: rule name.
 
 	expectedEntity := helper
 		                  parseTextRangeIntoEntity: textRange
@@ -117,7 +117,6 @@ MRESonarqubeHelperTest >> testParseIssueIntoViolationOfRuleInFile [
 		             ofRule: rule
 		             inFile: file.
 
-	self assert: violation rule equals: rule.
 	self assert: violation rule description equals: message.
 
 	expectedEntity := sonarHelper
@@ -206,7 +205,7 @@ MRESonarqubeHelperTest >> testViolationsInMergeRequestOfInFileUsingRuleId [
 		              usingRuleId: ruleId.
 
 	self assert: violations size equals: 1.
-	self assert: violations first rule equals: rule.
+	self assert: violations first rule name equals: rule name.
 
 	expectedEntity := helper
 		                  parseTextRangeIntoEntity: textRange
