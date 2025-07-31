@@ -145,7 +145,7 @@ MooseRuleEngineTest >> testSetHelpers [
 MooseRuleEngineTest >> testSetModel [
 
 	| model |
-	model := FASTJavaModel  new.
+	model := MooseModel new.
 	
 	ruleEngine setRules: { rule1 }.
 	ruleEngine setModel: model.
@@ -158,7 +158,7 @@ MooseRuleEngineTest >> testSetModel [
 MooseRuleEngineTest >> testSetModelSetRuleAfter [
 
 	| model |
-	model := FASTJavaModel  new.
+	model := MooseModel new.
 
 	ruleEngine setModel: model.	
 	ruleEngine setRules: { rule1 }.
