@@ -12,7 +12,7 @@ Class {
 MREViolationTest >> testAddEntity [
 
 	| entity violation |
-	entity := FASTJavaModel new.
+	entity := MooseModel new.
 	
 	violation := MREViolation new.
 	
