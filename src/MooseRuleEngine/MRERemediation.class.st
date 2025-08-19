@@ -26,6 +26,15 @@ MRERemediation >> fixes: anObject [
 	fixes := anObject
 ]
 
+{ #category : 'testing' }
+MRERemediation >> hasConflictWith: otherRemediation [
+	 ^ fixes anySatisfy: [:fix1 |
+        otherRemediation fixes anySatisfy: [:fix2 |
+            fix1 hasConflictWith: fix2
+        ]
+    ]
+]
+
 { #category : 'initialization' }
 MRERemediation >> initialize [ 
 	fixes := {  }.
