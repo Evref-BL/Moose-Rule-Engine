@@ -90,6 +90,103 @@ MREFixTest >> testEndLine [
 ]
 
 { #category : 'tests' }
+MREFixTest >> testHasConflictWith [
+
+	| file1 fix1 file2 fix2 |
+	file1 := MREFile new path: '/file1'.
+	fix1 := MREFix new startPos: 10; endPos: 20; file: file1.
+	
+	file2 := MREFile new path: '/file2'.
+	fix2 := MREFix new startPos: 15; endPos: 25; file: file2.
+	
+	self assert: (fix1 hasConflictWith: fix2) equals: false.
+]
+
+{ #category : 'tests' }
+MREFixTest >> testHasConflictWithFix1BeforeFix2 [
+
+	| file1 fix1 fix2 |
+	file1 := MREFile new path: '/file1'.
+	fix1 := MREFix new startPos: 10; endPos: 20; file: file1.
+	
+	fix2 := MREFix new startPos: 21; endPos: 30; file: file1.
+	
+	self assert: (fix1 hasConflictWith: fix2) equals: false.
+]
+
+{ #category : 'tests' }
+MREFixTest >> testHasConflictWithFix1CompletelyInsideFix2 [
+
+	| file1 fix1 fix2 |
+	file1 := MREFile new path: '/file1'.
+	fix1 := MREFix new startPos: 15; endPos: 20; file: file1.
+	
+	fix2 := MREFix new startPos: 10; endPos: 25; file: file1.
+	
+	self assert: (fix1 hasConflictWith: fix2) equals: true.
+]
+
+{ #category : 'tests' }
+MREFixTest >> testHasConflictWithFix2BeforeFix1 [
+
+	| file1 fix1 fix2 |
+	file1 := MREFile new path: '/file1'.
+	fix1 := MREFix new startPos: 21; endPos: 30; file: file1.
+	
+	fix2 := MREFix new startPos: 10; endPos: 20; file: file1.
+	
+	self assert: (fix1 hasConflictWith: fix2) equals: false.
+]
+
+{ #category : 'tests' }
+MREFixTest >> testHasConflictWithFix2CompletelyInsideFix1 [
+
+	| file1 fix1 fix2 |
+	file1 := MREFile new path: '/file1'.
+	fix1 := MREFix new startPos: 10; endPos: 25; file: file1.
+	
+	fix2 := MREFix new startPos: 15; endPos: 20; file: file1.
+	
+	self assert: (fix1 hasConflictWith: fix2) equals: true.
+]
+
+{ #category : 'tests' }
+MREFixTest >> testHasConflictWithPartialOverlapAtEnd [
+
+	| file1 fix1 fix2 |
+	file1 := MREFile new path: '/file1'.
+	fix1 := MREFix new startPos: 15; endPos: 25; file: file1.
+	
+	fix2 := MREFix new startPos: 10; endPos: 20; file: file1.
+	
+	self assert: (fix1 hasConflictWith: fix2) equals: true.
+]
+
+{ #category : 'tests' }
+MREFixTest >> testHasConflictWithPartialOverlapAtStart [
+
+	| file1 fix1 fix2 |
+	file1 := MREFile new path: '/file1'.
+	fix1 := MREFix new startPos: 10; endPos: 20; file: file1.
+	
+	fix2 := MREFix new startPos: 15; endPos: 25; file: file1.
+	
+	self assert: (fix1 hasConflictWith: fix2) equals: true.
+]
+
+{ #category : 'tests' }
+MREFixTest >> testHasConflictWithZeroLengthFix [
+
+	| file1 fix1 fix2 |
+	file1 := MREFile new path: '/file1'.
+	fix1 := MREFix new startPos: 10; endPos: 10; file: file1.
+	
+	fix2 := MREFix new startPos: 10; endPos: 20; file: file1.
+	
+	self assert: (fix1 hasConflictWith: fix2) equals: false.
+]
+
+{ #category : 'tests' }
 MREFixTest >> testNewLines [
 
 	| file fix newLines |

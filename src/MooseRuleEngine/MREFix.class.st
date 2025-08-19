@@ -68,6 +68,14 @@ MREFix >> file: anObject [
 	file := anObject
 ]
 
+{ #category : 'testing' }
+MREFix >> hasConflictWith: otherFix [
+	| sameFile |
+    startPos = endPos ifTrue: [ ^false ].
+    sameFile := file path = otherFix file path.
+    ^ sameFile and: [ (startPos <= otherFix endPos) and: [ otherFix startPos <= endPos ] ]
+]
+
 { #category : 'instance creation' }
 MREFix >> newLines [
 
