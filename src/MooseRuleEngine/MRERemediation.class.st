@@ -9,6 +9,11 @@ Class {
 	#package : 'MooseRuleEngine'
 }
 
+{ #category : 'adding' }
+MRERemediation >> addFix: fix [
+	fixes push: fix
+]
+
 { #category : 'accessing' }
 MRERemediation >> fixes [
 
@@ -19,6 +24,11 @@ MRERemediation >> fixes [
 MRERemediation >> fixes: anObject [
 
 	fixes := anObject
+]
+
+{ #category : 'initialization' }
+MRERemediation >> initialize [ 
+	fixes := {  }.
 ]
 
 { #category : 'accessing' }
