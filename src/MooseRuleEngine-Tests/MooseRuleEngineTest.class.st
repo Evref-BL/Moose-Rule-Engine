@@ -100,6 +100,7 @@ MooseRuleEngineTest >> testFix [
 	result := ruleEngine fix: { violation1 }.
 	
 	self assert: result size equals: 1.
+	self assert: result first class equals: MRERemediation
 ]
 
 { #category : 'tests' }
