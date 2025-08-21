@@ -55,7 +55,8 @@ MooseRuleEngine >> fix: violations [
 	^violations collect: [ :violation |
 		| fixes |
 		fixes := violation rule fix: violation.
-		violation -> fixes ]
+		MRERemediation new violation: violation; fixes: fixes.
+	 ]
 ]
 
 { #category : 'accessing' }
