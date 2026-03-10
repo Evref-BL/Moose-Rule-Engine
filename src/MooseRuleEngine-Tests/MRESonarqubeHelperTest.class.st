@@ -87,6 +87,74 @@ MRESonarqubeHelperTest >> testAllViolationsOfInFileUsingRuleId [
 ]
 
 { #category : 'tests' }
+MRESonarqubeHelperTest >> testAllViolationsOfInFileUsingRuleIdWithFilePath [
+
+
+	| mergeRequestId rule file ruleId helper violations projectKey sonarqubeApi issue1 issue2 params expectedEntity path paramPath |
+	mergeRequestId := 1.
+	rule := MRERule new.
+	file := MREFile new
+		        path: 'test/test.ts';
+		        content: 'class Java {}'.
+	ruleId := 'java:1111'.
+	projectKey := 'projectKey'.
+	path := 'test'.
+
+	sonarqubeApi := SonarAPIMock new.
+
+	issue1 := {
+		          (#textRange -> textRange).
+		          (#status -> 'OPEN').
+		          (#flows -> {  }).
+		
+		#message -> 'message'
+		 } asDictionary.
+						
+						
+			
+
+	issue2 := {
+		          (#textRange -> textRange).
+		          (#status -> 'CLOSE').
+		          (#flows -> {  }) .
+		
+			#message -> 'message'} asDictionary.
+		
+	paramPath := file path removePrefix: (path, '/').
+	params := {
+		          (#componentKeys -> (projectKey , ':' , paramPath)).
+		          (#rules -> ruleId) } asDictionary.
+
+	(sonarqubeApi issues stub searchWithParams: params) willReturn: {
+			issue1.
+			issue2 }.
+			
+
+	helper := MRESonarqubeHelper new
+		          mergeRequestId: 1;
+		          type: 'all';
+		          projectKey: projectKey;
+		          sonarqubeApi: sonarqubeApi;
+					 sourcePath: path.
+
+	violations := helper
+		              allViolationsOf: rule inFile: file  usingRuleId: ruleId.
+		              
+	self assert: violations size equals: 1.
+	self assert: violations first rule name equals: rule name.
+
+	expectedEntity := helper
+		                  parseTextRangeIntoEntity: textRange
+		                  ofFile: file.
+
+	violations first entities do: [ :entity |
+		self assert: entity file equals: expectedEntity file.
+		self assert: entity startPos equals: expectedEntity startPos.
+		self assert: entity endPos equals: expectedEntity endPos.
+		self assert: entity model equals: expectedEntity model ]
+]
+
+{ #category : 'tests' }
 MRESonarqubeHelperTest >> testParseIssueIntoViolationOfRuleInFile [
 
 	| issue sonarHelper violation rule location1 location2 fileContent file expectedEntity message |
