@@ -15,9 +15,11 @@ Class {
 { #category : 'as yet unclassified' }
 MRESonarqubeHelper >> allViolationsOf: rule inFile: file usingRuleId: ruleId [
 
-	| params issues |
+	| params issues filePath |
+	filePath := sourcePath ifNotNil: [ file path removePrefix: (sourcePath, '/') ]ifNil: [ file path ].
+	
 	params := {
-		          (#componentKeys -> (projectKey , ':' , file path)).
+		          (#componentKeys -> (projectKey , ':' , filePath)).
 		          (#rules -> ruleId) } asDictionary.
 
 	issues := sonarqubeApi issues searchWithParams: params.
