@@ -1,6 +1,6 @@
 Class {
 	#name : 'BaselineOfMooseRuleEngine',
-	#superclass : 'BaselineOf',
+	#superclass : 'Object',
 	#category : 'BaselineOfMooseRuleEngine',
 	#package : 'BaselineOfMooseRuleEngine'
 }
@@ -31,10 +31,7 @@ BaselineOfMooseRuleEngine >> defineDependencies: spec [
 		with: [
 			spec repository: 'github://Evref-BL/Sonarqube-Pharo-API:develop' ].
 
-	spec baseline: 'FASTJava' with: [
-		spec
-			repository: 'github://moosetechnology/FAST-Java:v3/src';
-			loads: #( 'smacc' ) ].	
+
 
 ]
 
@@ -47,7 +44,7 @@ BaselineOfMooseRuleEngine >> definePackages: spec [
 
 	spec
 		package: 'MooseRuleEngine'
-		with: [ spec requires: #( 'LLMAPI' 'SonarqubePharoAPI' 'FASTJava' ) ].
+		with: [ spec requires: #( 'LLMAPI' 'SonarqubePharoAPI' ) ].
 	spec
 		package: 'MooseRuleEngine-Tests'
 		with: [ spec requires: #( 'MooseRuleEngine' 'Mocketry' ) ]
