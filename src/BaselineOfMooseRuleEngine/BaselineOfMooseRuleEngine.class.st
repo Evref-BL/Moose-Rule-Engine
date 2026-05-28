@@ -29,7 +29,12 @@ BaselineOfMooseRuleEngine >> defineDependencies: spec [
 	spec
 		baseline: 'SonarqubePharoAPI'
 		with: [
-		spec repository: 'github://Evref-BL/Sonarqube-Pharo-API:develop' ]
+		spec repository: 'github://Evref-BL/Sonarqube-Pharo-API:develop' ].
+
+	spec baseline: 'FASTJava' with: [
+		spec
+			repository: 'github://moosetechnology/FAST-Java:v3/src';
+			loads: #( 'smacc' ) ]
 ]
 
 { #category : 'groups' }
@@ -46,5 +51,5 @@ BaselineOfMooseRuleEngine >> definePackages: spec [
 		with: [ spec requires: #( 'LLMAPI' 'SonarqubePharoAPI' ) ].
 	spec
 		package: 'MooseRuleEngine-Tests'
-		with: [ spec requires: #( 'MooseRuleEngine' 'Mocketry' ) ]
+		with: [ spec requires: #( 'MooseRuleEngine' 'Mocketry' 'FASTJava' ) ]
 ]
