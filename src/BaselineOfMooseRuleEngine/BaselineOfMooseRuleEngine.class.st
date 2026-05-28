@@ -1,6 +1,6 @@
 Class {
 	#name : 'BaselineOfMooseRuleEngine',
-	#superclass : 'Object',
+	#superclass : 'BaselineOf',
 	#category : 'BaselineOfMooseRuleEngine',
 	#package : 'BaselineOfMooseRuleEngine'
 }
@@ -21,22 +21,21 @@ BaselineOfMooseRuleEngine >> defineDependencies: spec [
 	spec
 		baseline: 'Mocketry'
 		with: [ spec repository: 'github://dionisiydk/Mocketry' ].
-		
+
 	spec
 		baseline: 'LLMAPI'
 		with: [ spec repository: 'github://Evref-BL/Pharo-LLMAPI:main/src' ].
-		
-	spec 
-	baseline: 'SonarqubePharoAPI'
+
+	spec
+		baseline: 'SonarqubePharoAPI'
 		with: [
-			spec repository: 'github://Evref-BL/Sonarqube-Pharo-API:develop' ].
-
-
-
+		spec repository: 'github://Evref-BL/Sonarqube-Pharo-API:develop' ]
 ]
 
 { #category : 'groups' }
 BaselineOfMooseRuleEngine >> defineGroups: spec [
+
+	
 ]
 
 { #category : 'packages' }

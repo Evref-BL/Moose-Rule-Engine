@@ -9,6 +9,18 @@ Class {
 }
 
 { #category : 'tests' }
+MRERuleTest >> testDoesNotApplyWithoutSupportedExtensions [
+
+	| rule file |
+	rule := MRERule new.
+	file := MREFile new
+		        path: 'test.java';
+		        content: 'content'.
+
+	self deny: (rule appliesToFile: file)
+]
+
+{ #category : 'tests' }
 MRERuleTest >> testGetHelper [
 
 	| rule helper |

@@ -18,6 +18,13 @@ MRERule >> analyse: file [
 	^self subclassResponsibility 
 ]
 
+{ #category : 'testing' }
+MRERule >> appliesToFile: file [
+
+	^ self supportedExtensions includes:
+		  file path asFileReference extension asLowercase
+]
+
 { #category : 'accessing' }
 MRERule >> description [
 
@@ -86,4 +93,10 @@ MRERule >> name [
 MRERule >> name: anObject [
 
 	name := anObject
+]
+
+{ #category : 'accessing' }
+MRERule >> supportedExtensions [
+
+	^ #(  )
 ]
