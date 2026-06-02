@@ -148,6 +148,8 @@ initialize
 - `analyse`: Takes an `MREFile` and returns a collection of `MREViolation`.
 - `fix`: Takes an `MREViolation` and returns a collection of `MREFix`.
 
+A rule must also specify the file extensions it supports. To help with common languages, MooseRuleEngine provides traits such as `TJavaRule` for Java files and `TTypescriptRule` for TypeScript files.
+
 ### Helper
 
 Helpers are classes injected into rules to assist in writing them. They are useful for interacting with external systems like SonarQube or LLMs.
