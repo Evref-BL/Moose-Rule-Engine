@@ -21,25 +21,26 @@ BaselineOfMooseRuleEngine >> defineDependencies: spec [
 	spec
 		baseline: 'Mocketry'
 		with: [ spec repository: 'github://dionisiydk/Mocketry' ].
-		
+
 	spec
 		baseline: 'LLMAPI'
 		with: [ spec repository: 'github://Evref-BL/Pharo-LLMAPI:main/src' ].
-		
-	spec 
-	baseline: 'SonarqubePharoAPI'
+
+	spec
+		baseline: 'SonarqubePharoAPI'
 		with: [
-			spec repository: 'github://Evref-BL/Sonarqube-Pharo-API:develop' ].
+		spec repository: 'github://Evref-BL/Sonarqube-Pharo-API:develop' ].
 
 	spec baseline: 'FASTJava' with: [
 		spec
 			repository: 'github://moosetechnology/FAST-Java:v3/src';
-			loads: #( 'smacc' ) ].	
-
+			loads: #( 'smacc' ) ]
 ]
 
 { #category : 'groups' }
 BaselineOfMooseRuleEngine >> defineGroups: spec [
+
+	
 ]
 
 { #category : 'packages' }
@@ -47,8 +48,8 @@ BaselineOfMooseRuleEngine >> definePackages: spec [
 
 	spec
 		package: 'MooseRuleEngine'
-		with: [ spec requires: #( 'LLMAPI' 'SonarqubePharoAPI' 'FASTJava' ) ].
+		with: [ spec requires: #( 'LLMAPI' 'SonarqubePharoAPI' ) ].
 	spec
 		package: 'MooseRuleEngine-Tests'
-		with: [ spec requires: #( 'MooseRuleEngine' 'Mocketry' ) ]
+		with: [ spec requires: #( 'MooseRuleEngine' 'Mocketry' 'FASTJava' ) ]
 ]

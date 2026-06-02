@@ -20,3 +20,9 @@ RuleMock1 >> fix: violation [
 	fix := MREFix new.
 	^ { fix }
 ]
+
+{ #category : 'accessing' }
+RuleMock1 >> supportedExtensions [
+
+	^ #( 'ts' )
+]
