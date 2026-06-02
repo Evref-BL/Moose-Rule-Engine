@@ -72,6 +72,44 @@ MooseRuleEngineTest >> testDetectAndFix [
 ]
 
 { #category : 'tests' }
+MooseRuleEngineTest >> testDetectIgnoresUnsupportedFiles [
+
+	| violations |
+	ruleEngine rules: { rule1 }.
+	ruleEngine files: {
+			file1.
+			file2 }.
+
+	violations := ruleEngine detect.
+
+	self assert: violations size equals: 1.
+	self assert: violations first rule equals: rule1
+]
+
+{ #category : 'tests' }
+MooseRuleEngineTest >> testDetectMixedRuleTypes [
+
+	| javaRule violations |
+	javaRule := RuleMockJava new.
+	ruleEngine rules: {
+			rule1.
+			javaRule }.
+	ruleEngine files: {
+			file1.
+			file2 }.
+
+	violations := ruleEngine detect.
+
+	self assert: violations size equals: 2.
+	self
+		assertCollection:
+		(violations collect: [ :violation | violation rule ])
+		hasSameElements: {
+				rule1.
+				javaRule }
+]
+
+{ #category : 'tests' }
 MooseRuleEngineTest >> testDetectWithoutFiles [
 
 	| violations |

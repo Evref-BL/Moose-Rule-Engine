@@ -19,13 +19,13 @@ MooseRuleEngine >> addHelper: helper [
 
 { #category : 'as yet unclassified' }
 MooseRuleEngine >> detect [
+
 	| violations |
 	violations := rules collect: [ :rule |
-		files collect: [ :file | rule analyse: file ].
-	].
+		              (files select: [ :file | rule appliesToFile: file ])
+			              collect: [ :file | rule analyse: file ] ].
 
-	^ violations flattened 
-	
+	^ violations flattened
 ]
 
 { #category : 'as yet unclassified' }
