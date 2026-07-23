@@ -35,25 +35,39 @@ Moose-Rule-Engine is a multi-language, rule-based engine designed for code analy
 
 ### From Playground
 
-To load the Moose-Rule-Engine from the Playground, run the following script:
+To load Moose-Rule-Engine runtime from a Playground:
 
 ```st
 Metacello new
   githubUser: 'Evref-BL' project: 'Moose-Rule-Engine' commitish: 'main' path: 'src';
   baseline: 'MooseRuleEngine';
+  loads: #( 'default' );
+  onConflict: [ :ex | ex useIncoming ];
+  load.
+```
+
+To load everything for development, including tests:
+
+```st
+Metacello new
+  githubUser: 'Evref-BL' project: 'Moose-Rule-Engine' commitish: 'main' path: 'src';
+  baseline: 'MooseRuleEngine';
+  loads: #( 'dev' );
   onConflict: [ :ex | ex useIncoming ];
   load.
 ```
 
 ### Baseline Dependency
 
-To include Moose-Rule-Engine as a dependency in your project, add the following to your baseline:
+To use Moose-Rule-Engine as a dependency:
 
 ```st
 spec baseline: 'MooseRuleEngine' with: [
   spec repository: 'github://Evref-BL/Moose-Rule-Engine:main'.
 ].
 ```
+
+By default this loads only the runtime package. Tests and dev dependencies are opt-in through the `tests` or `dev` groups.
 
 ---
 

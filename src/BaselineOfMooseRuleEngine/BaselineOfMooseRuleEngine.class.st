@@ -10,17 +10,14 @@ BaselineOfMooseRuleEngine >> baseline: spec [
 
 	<baseline>
 	spec for: #common do: [
-		self defineDependencies: spec.
-		self definePackages: spec.
-		self defineGroups: spec ]
+			self defineDependencies: spec.
+			self defineDevDependencies: spec.
+			self definePackages: spec.
+			self defineGroups: spec ]
 ]
 
 { #category : 'dependencies' }
 BaselineOfMooseRuleEngine >> defineDependencies: spec [
-
-	spec
-		baseline: 'Mocketry'
-		with: [ spec repository: 'github://dionisiydk/Mocketry:v7.0.3' ].
 
 	spec
 		baseline: 'LLMAPI'
@@ -29,18 +26,30 @@ BaselineOfMooseRuleEngine >> defineDependencies: spec [
 	spec
 		baseline: 'SonarqubePharoAPI'
 		with: [
-		spec repository: 'github://Evref-BL/Sonarqube-Pharo-API:0.1.0' ].
+		spec repository: 'github://Evref-BL/Sonarqube-Pharo-API:0.1.0' ]
+]
+
+{ #category : 'dependencies' }
+BaselineOfMooseRuleEngine >> defineDevDependencies: spec [
+
+	spec
+		baseline: 'Mocketry'
+		with: [ spec repository: 'github://dionisiydk/Mocketry:v7.0.3' ].
 
 	spec baseline: 'FASTJava' with: [
-		spec
-			repository: 'github://moosetechnology/FAST-Java:v4/src';
-			loads: #( 'smacc' ) ]
+			spec
+				repository: 'github://moosetechnology/FAST-Java:v4/src';
+				loads: #( 'smacc' ) ]
 ]
 
 { #category : 'groups' }
 BaselineOfMooseRuleEngine >> defineGroups: spec [
 
-	
+	spec
+		group: 'default' with: #( 'MooseRuleEngine' );
+		group: 'tests' with: #( 'MooseRuleEngine-Tests' );
+		group: 'dev' with: #( 'default' 'tests' );
+		group: 'all' with: #( 'default' 'tests' )
 ]
 
 { #category : 'packages' }
