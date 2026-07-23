@@ -20,7 +20,7 @@ BaselineOfMooseRuleEngine >> defineDependencies: spec [
 
 	spec
 		baseline: 'Mocketry'
-		with: [ spec repository: 'github://dionisiydk/Mocketry:7.0.3' ].
+		with: [ spec repository: 'github://dionisiydk/Mocketry:v7.0.3' ].
 
 	spec
 		baseline: 'LLMAPI'
