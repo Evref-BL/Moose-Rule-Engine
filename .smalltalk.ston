@@ -4,6 +4,7 @@ SmalltalkCISpec {
       #baseline : 'MooseRuleEngine',
       #directory : 'src',
       #ignoreImage : true,
+      #load : [ 'tests' ],
       #onConflict : #useIncoming,
       #onUpgrade : #useIncoming
     }
