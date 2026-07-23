@@ -33,7 +33,7 @@ BaselineOfMooseRuleEngine >> defineDependencies: spec [
 
 	spec baseline: 'FASTJava' with: [
 		spec
-			repository: 'github://moosetechnology/FAST-Java:v3/src';
+			repository: 'github://moosetechnology/FAST-Java:v4/src';
 			loads: #( 'smacc' ) ]
 ]
 
