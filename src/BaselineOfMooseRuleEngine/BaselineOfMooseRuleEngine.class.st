@@ -26,7 +26,7 @@ BaselineOfMooseRuleEngine >> defineDependencies: spec [
 	spec
 		baseline: 'SonarqubePharoAPI'
 		with: [
-		spec repository: 'github://Evref-BL/Sonarqube-Pharo-API:0.1.0' ]
+		spec repository: 'github://Evref-BL/Sonarqube-Pharo-API:0.2.0' ]
 ]
 
 { #category : 'dependencies' }
