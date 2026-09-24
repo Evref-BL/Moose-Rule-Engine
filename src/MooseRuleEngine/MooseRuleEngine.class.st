@@ -68,9 +68,10 @@ MooseRuleEngine >> helpers [
 { #category : 'initialization' }
 MooseRuleEngine >> initialize [
 
-	rules := OrderedCollection new.
+	super initialize.
+	rules := #(  ).
 	files := OrderedCollection new.
-	helpers := OrderedCollection new.
+	helpers := OrderedCollection new
 ]
 
 { #category : 'accessing' }
@@ -116,10 +117,26 @@ MooseRuleEngine >> setModel: mooseModel [
 ]
 
 { #category : 'initialization' }
+MooseRuleEngine >> setPresets: presetNames [
+
+	| resolvedRules |
+	resolvedRules := MRERulePresetResolver rulesForPresetNames: presetNames.
+	self setRules: resolvedRules
+]
+
+{ #category : 'initialization' }
 MooseRuleEngine >> setRules: mreRules [
 
-	rules := mreRules collect: [ :rule | 
-		rule helpers: helpers .
-		rule model: model	
-	]
+	| ruleClasses newRules |
+	ruleClasses := (rules collect: [ :rule | rule class ]) asSet.
+	newRules := mreRules select: [ :rule |
+			            (ruleClasses includes: rule class)
+				            ifTrue: [ false ]
+				            ifFalse: [
+						            ruleClasses add: rule class.
+						            true ] ].
+	newRules do: [ :rule |
+			rule helpers: helpers.
+			rule model: model ].
+	rules := rules , newRules
 ]
