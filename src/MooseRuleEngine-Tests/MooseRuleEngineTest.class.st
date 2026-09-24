@@ -207,6 +207,16 @@ MooseRuleEngineTest >> testSetModelSetRuleAfter [
 ]
 
 { #category : 'tests' }
+MooseRuleEngineTest >> testSetPresets [
+
+	ruleEngine setPresets: #( 'mre-test-child' ).
+
+	self assert: (ruleEngine rules collect: [ :rule | rule class ]) equals: {
+			MRETestRuleOne.
+			MRETestRuleTwo }
+]
+
+{ #category : 'tests' }
 MooseRuleEngineTest >> testSetRules [
 
 	| helper |
@@ -217,4 +227,18 @@ MooseRuleEngineTest >> testSetRules [
 	self assertCollection: ruleEngine rules equals: { rule1 }.
 
 	self assertCollection: ruleEngine rules first helpers hasSameElements: { helper }
+]
+
+{ #category : 'tests' }
+MooseRuleEngineTest >> testSetRulesAfterPresets [
+
+	ruleEngine setPresets: #( 'mre-test-child' ).
+	ruleEngine setRules: {
+			MRETestRuleOne new.
+			RuleMock1 new }.
+
+	self assert: (ruleEngine rules collect: [ :rule | rule class ]) equals: {
+			MRETestRuleOne.
+			MRETestRuleTwo.
+			RuleMock1 }
 ]
