@@ -6,13 +6,19 @@ Class {
 }
 
 { #category : 'accessing' }
-MRETestCycleAPreset class >> parentPresetNames [
+MRETestCycleAPreset class >> parentPresets [
 
-	^ #( 'mre-test-cycle-b' )
+	^ { MRETestCycleBPreset }
 ]
 
 { #category : 'accessing' }
 MRETestCycleAPreset class >> presetName [
 
 	^ 'mre-test-cycle-a'
+]
+
+{ #category : 'accessing' }
+MRETestCycleAPreset class >> rules [
+
+	^ {  }
 ]

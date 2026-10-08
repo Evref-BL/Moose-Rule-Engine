@@ -6,9 +6,9 @@ Class {
 }
 
 { #category : 'accessing' }
-MRETestChildPreset class >> parentPresetNames [
+MRETestChildPreset class >> parentPresets [
 
-	^ #( 'mre-test-parent' )
+	^ { MRETestParentPreset }
 ]
 
 { #category : 'accessing' }
@@ -18,7 +18,7 @@ MRETestChildPreset class >> presetName [
 ]
 
 { #category : 'accessing' }
-MRETestChildPreset class >> ruleNames [
+MRETestChildPreset class >> rules [
 
-	^ #( 'MRETestRuleOne' 'MRETestRuleTwo' )
+	^ { MRETestRuleOne . MRETestRuleTwo }
 ]

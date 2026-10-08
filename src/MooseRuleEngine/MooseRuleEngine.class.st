@@ -5,7 +5,8 @@ Class {
 		'rules',
 		'files',
 		'helpers',
-		'model'
+		'model',
+		'presets'
 	],
 	#category : 'MooseRuleEngine',
 	#package : 'MooseRuleEngine'
@@ -20,8 +21,9 @@ MooseRuleEngine >> addHelper: helper [
 { #category : 'as yet unclassified' }
 MooseRuleEngine >> detect [
 
-	| violations |
-	violations := rules collect: [ :rule |
+	| violations allRules |
+	allRules := MRERulePresetResolver new resolveWithPresets: presets andRules: rules.
+	violations := allRules collect: [ :rule |
 		              (files select: [ :file | rule appliesToFile: file ])
 			              collect: [ :file | rule analyse: file ] ].
 
@@ -70,8 +72,9 @@ MooseRuleEngine >> initialize [
 
 	super initialize.
 	rules := #(  ).
+	presets := #( ).
 	files := OrderedCollection new.
-	helpers := OrderedCollection new
+	helpers := OrderedCollection new.
 ]
 
 { #category : 'accessing' }
@@ -82,6 +85,12 @@ MooseRuleEngine >> model [
 { #category : 'accessing' }
 MooseRuleEngine >> model: aModel [
 	model := aModel 
+]
+
+{ #category : 'accessing' }
+MooseRuleEngine >> presets [
+
+	^ presets
 ]
 
 { #category : 'accessing' }
@@ -117,26 +126,16 @@ MooseRuleEngine >> setModel: mooseModel [
 ]
 
 { #category : 'initialization' }
-MooseRuleEngine >> setPresets: presetNames [
+MooseRuleEngine >> setPresets: presetsClass [
 
-	| resolvedRules |
-	resolvedRules := MRERulePresetResolver rulesForPresetNames: presetNames.
-	self setRules: resolvedRules
+	presets := presetsClass
 ]
 
 { #category : 'initialization' }
 MooseRuleEngine >> setRules: mreRules [
 
-	| ruleClasses newRules |
-	ruleClasses := (rules collect: [ :rule | rule class ]) asSet.
-	newRules := mreRules select: [ :rule |
-			            (ruleClasses includes: rule class)
-				            ifTrue: [ false ]
-				            ifFalse: [
-						            ruleClasses add: rule class.
-						            true ] ].
-	newRules do: [ :rule |
-			rule helpers: helpers.
-			rule model: model ].
-	rules := rules , newRules
+	rules := mreRules collect: [ :rule | 
+		rule helpers: helpers .
+		rule model: model	
+	]
 ]
