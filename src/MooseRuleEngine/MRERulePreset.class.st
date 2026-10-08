@@ -9,9 +9,9 @@ Class {
 }
 
 { #category : 'accessing' }
-MRERulePreset class >> parentPresetNames [
+MRERulePreset class >> parentPresets [
 
-	^ #(  )
+	^ self subclassResponsibility
 ]
 
 { #category : 'accessing' }
@@ -20,8 +20,14 @@ MRERulePreset class >> presetName [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'accessing' }
-MRERulePreset class >> ruleNames [
+{ #category : 'as yet unclassified' }
+MRERulePreset class >> resolveRules [ 
+	
+ ^MRERulePresetResolver new resolveWithPresets: self parentPresets andRules: self rules.
+]
 
-	^ #(  )
+{ #category : 'accessing' }
+MRERulePreset class >> rules [
+
+	^ self subclassResponsibility
 ]
