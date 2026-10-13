@@ -9,8 +9,9 @@ Class {
 }
 
 { #category : 'initialization' }
-SonarAPIMock >> initialize [ 
-	issues := Object new.
+SonarAPIMock >> initialize [
+
+	issues := Object new
 ]
 
 { #category : 'accessing' }

@@ -20,5 +20,7 @@ MRETestChildPreset class >> presetName [
 { #category : 'accessing' }
 MRETestChildPreset class >> rules [
 
-	^ { MRETestRuleOne . MRETestRuleTwo }
+	^ {
+		  MRETestRuleOne.
+		  MRETestRuleTwo }
 ]

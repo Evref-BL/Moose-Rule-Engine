@@ -21,9 +21,11 @@ MRERulePreset class >> presetName [
 ]
 
 { #category : 'as yet unclassified' }
-MRERulePreset class >> resolveRules [ 
-	
- ^MRERulePresetResolver new resolveWithPresets: self parentPresets andRules: self rules.
+MRERulePreset class >> resolveRules [
+
+	^ MRERulePresetResolver new
+		  resolveWithPresets: self parentPresets
+		  andRules: self rules
 ]
 
 { #category : 'accessing' }

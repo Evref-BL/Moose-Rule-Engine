@@ -20,9 +20,7 @@ MREFix >> applyOnFile [
 		         ifTrue: [
 		         file content copyFrom: startPos to: file content size ]
 		         ifFalse: [
-		         file content
-			         copyFrom: endPos + 1
-			         to: file content size ].
+		         file content copyFrom: endPos + 1 to: file content size ].
 	^ before , content , after
 ]
 
@@ -70,10 +68,12 @@ MREFix >> file: anObject [
 
 { #category : 'testing' }
 MREFix >> hasConflictWith: otherFix [
+
 	| sameFile |
-    startPos = endPos ifTrue: [ ^false ].
-    sameFile := file path = otherFix file path.
-    ^ sameFile and: [ (startPos <= otherFix endPos) and: [ otherFix startPos <= endPos ] ]
+	startPos = endPos ifTrue: [ ^ false ].
+	sameFile := file path = otherFix file path.
+	^ sameFile and: [
+		  startPos <= otherFix endPos and: [ otherFix startPos <= endPos ] ]
 ]
 
 { #category : 'instance creation' }
@@ -83,8 +83,8 @@ MREFix >> newLines [
 	startLineIndexes := file content indexesOfLine: self startLine.
 	endLineIndexes := file content indexesOfLine: self endLine.
 
-	 ((startLineIndexes at: #start) = startPos and:
-		  ((endLineIndexes at: #end) = endPos and: content = '')) ifTrue: [
+	((startLineIndexes at: #start) = startPos and:
+		 ((endLineIndexes at: #end) = endPos and: content = '')) ifTrue: [
 		^ '' ].
 
 	newFile := self applyOnFile.
@@ -97,10 +97,10 @@ MREFix >> newLines [
 	lines := newFile lines copyFrom: startLine to: endLine.
 
 	^ lines inject: '' into: [ :acc :line |
-		  '' join: {
-				  acc.
-				  line.
-				  Character lf asString } ]
+			  '' join: {
+					  acc.
+					  line.
+					  Character lf asString } ]
 ]
 
 { #category : 'accessing' }

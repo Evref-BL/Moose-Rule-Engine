@@ -39,9 +39,7 @@ MooseRuleEngineTest >> testAddHelper [
 	ruleEngine setRules: { rule1 }.
 	ruleEngine addHelper: helper.
 
-	self
-		assertCollection: ruleEngine rules
-		hasSameElements: { rule1 }
+	self assertCollection: ruleEngine rules hasSameElements: { rule1 }
 ]
 
 { #category : 'tests' }
@@ -76,9 +74,9 @@ MooseRuleEngineTest >> testDetectAndFix [
 	| result |
 	ruleEngine rules: { rule1 }.
 	ruleEngine files: { file1 }.
-	
+
 	result := ruleEngine detectAndFix.
-	
+
 	self assert: result size equals: 1
 ]
 
@@ -94,7 +92,9 @@ MooseRuleEngineTest >> testDetectIgnoresUnsupportedFiles [
 	violations := ruleEngine detect.
 
 	self assert: violations size equals: 1.
-	self assert: violations first rule class className equals: rule1 className
+	self
+		assert: violations first rule class className
+		equals: rule1 className
 ]
 
 { #category : 'tests' }
@@ -111,13 +111,15 @@ MooseRuleEngineTest >> testDetectMixedRuleTypes [
 
 	violations := ruleEngine detect.
 
-self assert: violations size equals: 2.
+	self assert: violations size equals: 2.
 
-rules := violations collect: [ :violation | violation rule ].
+	rules := violations collect: [ :violation | violation rule ].
 
-self
-	assert: (rules collect: [ :rule | rule class className ]) asBag
-	equals: { rule1 className. javaRule className } asBag
+	self
+		assert: (rules collect: [ :rule | rule class className ]) asBag
+		equals: {
+				rule1 className.
+				javaRule className } asBag
 ]
 
 { #category : 'tests' }
@@ -144,7 +146,7 @@ MooseRuleEngineTest >> testDetectWithoutRulesOrFiles [
 MooseRuleEngineTest >> testFix [
 
 	| violation1 result |
-	violation1 := MREViolation new rule: (rule1 new).
+	violation1 := MREViolation new rule: rule1 new.
 
 	result := ruleEngine fix: { violation1 }.
 
@@ -161,8 +163,7 @@ MooseRuleEngineTest >> testSetFiles [
 
 	self assertCollection: ruleEngine files hasSameElements: {
 			file1.
-			file2 }.
-
+			file2 }
 ]
 
 { #category : 'tests' }
@@ -181,7 +182,7 @@ MooseRuleEngineTest >> testSetHelpers [
 
 	self assertCollection: ruleEngine helpers hasSameElements: {
 			helper2.
-			helper3 }.
+			helper3 }
 ]
 
 { #category : 'tests' }
@@ -191,7 +192,7 @@ MooseRuleEngineTest >> testSetModel [
 	model := MooseModel new.
 	ruleEngine setModel: model.
 
-	self assert: ruleEngine model equals: model.
+	self assert: ruleEngine model equals: model
 ]
 
 { #category : 'tests' }
@@ -201,7 +202,9 @@ MooseRuleEngineTest >> testSetPresets [
 	testPresets := #( MRETestChildPreset ).
 	ruleEngine setPresets: testPresets.
 
-	self assertCollection: ruleEngine presets hasSameElements: testPresets
+	self
+		assertCollection: ruleEngine presets
+		hasSameElements: testPresets
 ]
 
 { #category : 'tests' }
@@ -209,5 +212,5 @@ MooseRuleEngineTest >> testSetRules [
 
 	ruleEngine setRules: { rule1 }.
 
-	self assertCollection: ruleEngine rules equals: { rule1 }.
+	self assertCollection: ruleEngine rules equals: { rule1 }
 ]

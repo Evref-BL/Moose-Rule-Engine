@@ -13,10 +13,10 @@ MREViolationTest >> testAddEntity [
 
 	| entity violation |
 	entity := MooseModel new.
-	
+
 	violation := MREViolation new.
-	
+
 	violation addEntity: entity.
-	
-	self assertCollection: violation entities hasSameElements: { entity }  
+
+	self assertCollection: violation entities hasSameElements: { entity }
 ]

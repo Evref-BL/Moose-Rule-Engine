@@ -59,7 +59,7 @@ MREEntity >> file: anObject [
 { #category : 'accessing' }
 MREEntity >> model [
 
-	^model
+	^ model
 ]
 
 { #category : 'accessing' }
@@ -88,5 +88,6 @@ MREEntity >> startPos: anObject [
 
 { #category : 'evaluating' }
 MREEntity >> value [
-	^file content copyFrom: startPos to: endPos.
+
+	^ file content copyFrom: startPos to: endPos
 ]

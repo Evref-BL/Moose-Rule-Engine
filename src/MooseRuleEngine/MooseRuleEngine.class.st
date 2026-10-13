@@ -15,7 +15,7 @@ Class {
 { #category : 'adding' }
 MooseRuleEngine >> addHelper: helper [
 
-	helpers add: helper.
+	helpers add: helper
 ]
 
 { #category : 'adding' }
@@ -67,11 +67,12 @@ MooseRuleEngine >> files: anObject [
 { #category : 'fix - static' }
 MooseRuleEngine >> fix: violations [
 
-	^violations collect: [ :violation |
-		| fixes |
-		fixes := violation rule fix: violation.
-		MRERemediation new violation: violation; fixes: fixes.
-	 ]
+	^ violations collect: [ :violation |
+			  | fixes |
+			  fixes := violation rule fix: violation.
+			  MRERemediation new
+				  violation: violation;
+				  fixes: fixes ]
 ]
 
 { #category : 'accessing' }
@@ -92,12 +93,14 @@ MooseRuleEngine >> initialize [
 
 { #category : 'accessing' }
 MooseRuleEngine >> model [
-	^model
+
+	^ model
 ]
 
 { #category : 'accessing' }
 MooseRuleEngine >> model: aModel [
-	model := aModel 
+
+	model := aModel
 ]
 
 { #category : 'accessing' }
@@ -121,7 +124,7 @@ MooseRuleEngine >> rules: anObject [
 { #category : 'initialization' }
 MooseRuleEngine >> setFiles: mreFiles [
 
-	files := mreFiles 
+	files := mreFiles
 ]
 
 { #category : 'initialization' }
@@ -134,7 +137,7 @@ MooseRuleEngine >> setHelpers: mreHelpers [
 { #category : 'initialization' }
 MooseRuleEngine >> setModel: mooseModel [
 
-	model := mooseModel.
+	model := mooseModel
 ]
 
 { #category : 'initialization' }

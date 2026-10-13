@@ -13,18 +13,18 @@ Class {
 
 { #category : 'running' }
 MRESonarqubeHelperTest >> setUp [
+
 	super setUp.
 
 	textRange := {
 		             (#startLine -> 1).
 		             (#startOffset -> 0).
 		             (#endLine -> 1).
-		             (#endOffset -> 10) } asDictionary.
+		             (#endOffset -> 10) } asDictionary
 ]
 
 { #category : 'tests' }
 MRESonarqubeHelperTest >> testAllViolationsOfInFileUsingRuleId [
-
 
 	| mergeRequestId rule file ruleId helper violations projectKey sonarqubeApi issue1 issue2 params expectedEntity |
 	mergeRequestId := 1.
@@ -41,19 +41,18 @@ MRESonarqubeHelperTest >> testAllViolationsOfInFileUsingRuleId [
 		          (#textRange -> textRange).
 		          (#status -> 'OPEN').
 		          (#flows -> {  }).
-		
-		#message -> 'message'
-		 } asDictionary.
-						
-						
-			
+
+		          (#message -> 'message') } asDictionary.
+
+
+
 
 	issue2 := {
 		          (#textRange -> textRange).
 		          (#status -> 'CLOSE').
-		          (#flows -> {  }) .
-		
-			#message -> 'message'} asDictionary.
+		          (#flows -> {  }).
+
+		          (#message -> 'message') } asDictionary.
 
 	params := {
 		          (#componentKeys -> (projectKey , ':' , file path)).
@@ -70,8 +69,10 @@ MRESonarqubeHelperTest >> testAllViolationsOfInFileUsingRuleId [
 		          sonarqubeApi: sonarqubeApi.
 
 	violations := helper
-		              allViolationsOf: rule inFile: file  usingRuleId: ruleId.
-		              
+		              allViolationsOf: rule
+		              inFile: file
+		              usingRuleId: ruleId.
+
 	self assert: violations size equals: 1.
 	self assert: violations first rule name equals: rule name.
 
@@ -80,15 +81,14 @@ MRESonarqubeHelperTest >> testAllViolationsOfInFileUsingRuleId [
 		                  ofFile: file.
 
 	violations first entities do: [ :entity |
-		self assert: entity file equals: expectedEntity file.
-		self assert: entity startPos equals: expectedEntity startPos.
-		self assert: entity endPos equals: expectedEntity endPos.
-		self assert: entity model equals: expectedEntity model ]
+			self assert: entity file equals: expectedEntity file.
+			self assert: entity startPos equals: expectedEntity startPos.
+			self assert: entity endPos equals: expectedEntity endPos.
+			self assert: entity model equals: expectedEntity model ]
 ]
 
 { #category : 'tests' }
 MRESonarqubeHelperTest >> testAllViolationsOfInFileUsingRuleIdWithFilePath [
-
 
 	| mergeRequestId rule file ruleId helper violations projectKey sonarqubeApi issue1 issue2 params expectedEntity path paramPath |
 	mergeRequestId := 1.
@@ -106,21 +106,20 @@ MRESonarqubeHelperTest >> testAllViolationsOfInFileUsingRuleIdWithFilePath [
 		          (#textRange -> textRange).
 		          (#status -> 'OPEN').
 		          (#flows -> {  }).
-		
-		#message -> 'message'
-		 } asDictionary.
-						
-						
-			
+
+		          (#message -> 'message') } asDictionary.
+
+
+
 
 	issue2 := {
 		          (#textRange -> textRange).
 		          (#status -> 'CLOSE').
-		          (#flows -> {  }) .
-		
-			#message -> 'message'} asDictionary.
-		
-	paramPath := file path removePrefix: (path, '/').
+		          (#flows -> {  }).
+
+		          (#message -> 'message') } asDictionary.
+
+	paramPath := file path removePrefix: path , '/'.
 	params := {
 		          (#componentKeys -> (projectKey , ':' , paramPath)).
 		          (#rules -> ruleId) } asDictionary.
@@ -128,18 +127,20 @@ MRESonarqubeHelperTest >> testAllViolationsOfInFileUsingRuleIdWithFilePath [
 	(sonarqubeApi issues stub searchWithParams: params) willReturn: {
 			issue1.
 			issue2 }.
-			
+
 
 	helper := MRESonarqubeHelper new
 		          mergeRequestId: 1;
 		          type: 'all';
 		          projectKey: projectKey;
 		          sonarqubeApi: sonarqubeApi;
-					 sourcePath: path.
+		          sourcePath: path.
 
 	violations := helper
-		              allViolationsOf: rule inFile: file  usingRuleId: ruleId.
-		              
+		              allViolationsOf: rule
+		              inFile: file
+		              usingRuleId: ruleId.
+
 	self assert: violations size equals: 1.
 	self assert: violations first rule name equals: rule name.
 
@@ -148,10 +149,10 @@ MRESonarqubeHelperTest >> testAllViolationsOfInFileUsingRuleIdWithFilePath [
 		                  ofFile: file.
 
 	violations first entities do: [ :entity |
-		self assert: entity file equals: expectedEntity file.
-		self assert: entity startPos equals: expectedEntity startPos.
-		self assert: entity endPos equals: expectedEntity endPos.
-		self assert: entity model equals: expectedEntity model ]
+			self assert: entity file equals: expectedEntity file.
+			self assert: entity startPos equals: expectedEntity startPos.
+			self assert: entity endPos equals: expectedEntity endPos.
+			self assert: entity model equals: expectedEntity model ]
 ]
 
 { #category : 'tests' }
@@ -175,8 +176,7 @@ MRESonarqubeHelperTest >> testParseIssueIntoViolationOfRuleInFile [
 		         (#flows -> {
 			          { (#locations -> { location1 }) } asDictionary.
 			          { (#locations -> { location2 }) } asDictionary }).
-					#message -> message }
-		         asDictionary.
+		         (#message -> message) } asDictionary.
 
 	sonarHelper := MRESonarqubeHelper new.
 
@@ -192,10 +192,10 @@ MRESonarqubeHelperTest >> testParseIssueIntoViolationOfRuleInFile [
 		                  ofFile: file.
 
 	violation entities do: [ :entity |
-		self assert: entity file equals: expectedEntity file.
-		self assert: entity startPos equals: expectedEntity startPos.
-		self assert: entity endPos equals: expectedEntity endPos.
-		self assert: entity model equals: expectedEntity model ]
+			self assert: entity file equals: expectedEntity file.
+			self assert: entity startPos equals: expectedEntity startPos.
+			self assert: entity endPos equals: expectedEntity endPos.
+			self assert: entity model equals: expectedEntity model ]
 ]
 
 { #category : 'tests' }
@@ -223,7 +223,7 @@ MRESonarqubeHelperTest >> testParseTextRangeIntoEntityOfFile [
 	self
 		assert: entity startPos
 		equals: (textRangeClass at: #startOffset) + 1.
-	self assert: entity endPos equals: (textRangeClass at: #endOffset).
+	self assert: entity endPos equals: (textRangeClass at: #endOffset)
 ]
 
 { #category : 'tests' }
@@ -280,10 +280,10 @@ MRESonarqubeHelperTest >> testViolationsInMergeRequestOfInFileUsingRuleId [
 		                  ofFile: file.
 
 	violations first entities do: [ :entity |
-		self assert: entity file equals: expectedEntity file.
-		self assert: entity startPos equals: expectedEntity startPos.
-		self assert: entity endPos equals: expectedEntity endPos.
-		self assert: entity model equals: expectedEntity model ]
+			self assert: entity file equals: expectedEntity file.
+			self assert: entity startPos equals: expectedEntity startPos.
+			self assert: entity endPos equals: expectedEntity endPos.
+			self assert: entity model equals: expectedEntity model ]
 ]
 
 { #category : 'tests' }
@@ -303,7 +303,10 @@ MRESonarqubeHelperTest >> testViolationsOfInFileUsingRuleId [
 		          type: 'mergeRequest';
 		          projectKey: projectKey.
 
-	entity := MREEntity new file: file; startPos: 1; endPos: 5.
+	entity := MREEntity new
+		          file: file;
+		          startPos: 1;
+		          endPos: 5.
 
 	violation := MREViolation new
 		             rule: rule;
@@ -353,8 +356,8 @@ MRESonarqubeHelperTest >> testViolationsOfInFileUsingRuleIdIfAll [
 		             rule: rule;
 		             addEntity: entity.
 
-	(helper stub
-		 allViolationsOf: rule inFile: file usingRuleId: ruleId) willReturn: { violation }.
+	(helper stub allViolationsOf: rule inFile: file usingRuleId: ruleId)
+		willReturn: { violation }.
 
 	violations := helper
 		              violationsOf: rule
