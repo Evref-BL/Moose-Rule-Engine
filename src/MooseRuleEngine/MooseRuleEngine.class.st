@@ -18,6 +18,12 @@ MooseRuleEngine >> addHelper: helper [
 	helpers add: helper.
 ]
 
+{ #category : 'adding' }
+MooseRuleEngine >> addPreset: preset [
+
+	presets add: preset
+]
+
 { #category : 'as yet unclassified' }
 MooseRuleEngine >> detect [
 
@@ -78,10 +84,10 @@ MooseRuleEngine >> helpers [
 MooseRuleEngine >> initialize [
 
 	super initialize.
-	rules := #(  ).
-	presets := #( ).
+	rules := OrderedCollection new.
+	presets := OrderedCollection new.
 	files := OrderedCollection new.
-	helpers := OrderedCollection new.
+	helpers := OrderedCollection new
 ]
 
 { #category : 'accessing' }
