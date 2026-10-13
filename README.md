@@ -16,6 +16,7 @@ Moose-Rule-Engine is a multi-language, rule-based engine designed for code analy
 3. [Usage](#usage)
 4. [Core Concepts](#core-concepts)
    - [Rule](#rule)
+   - [Preset](#preset)
    - [Helper](#helper)
      - [SonarQube Helper](#sonarqube-helper)
      - [LLM Helper](#llm-helper)
@@ -26,6 +27,7 @@ Moose-Rule-Engine is a multi-language, rule-based engine designed for code analy
 
 - **Multi-language support**: Analyze and refactor code across multiple programming languages.
 - **Rule-based engine**: Define custom rules for code analysis and remediation.
+- **Reusable presets**: Group rule classes into composable presets.
 - **Automated fixes**: Automatically apply fixes to detected violations.
 - **Extensible helpers**: Integrate with external systems like SonarQube or LLMs.
 
@@ -73,7 +75,7 @@ By default this loads only the runtime package. Tests and dev dependencies are o
 
 ## Usage
 
-MooseRuleEngine take files and rules and return a collection of fixes. Here is a step by step on how to use it
+MooseRuleEngine takes files and rule classes and returns a collection of fixes. Here is a step-by-step guide to using it.
 
 ### 1. Initialize the Rule Engine
 
@@ -105,11 +107,26 @@ ruleEngine setModel: model.
 Define the rules you want to apply. Rules are objects that analyze files and suggest fixes. Add your rules to the engine:
 
 ```st
-rule := MyCustomRule new.
-ruleEngine setRules: { rule }.
+ruleEngine setRules: { MyCustomRule }.
 ```
 
-### 4. Add Helpers (Optional)
+### 4. Add Presets (Optional)
+
+Presets are reusable groups of rule classes. Pass preset classes to the engine:
+
+```st
+ruleEngine setPresets: { MyProjectPreset }.
+```
+
+You can also add presets individually and combine them with explicitly selected rule classes:
+
+```st
+ruleEngine
+  addPreset: MyProjectPreset;
+  setRules: { MyAdditionalRule }.
+```
+
+### 5. Add Helpers (Optional)
 
 Helpers can be used to enhance the functionality of your rules. For example, you can add a SonarQube helper:
 
@@ -123,7 +140,7 @@ sonarHelper := MRESonarqubeHelper new
 ruleEngine addHelper: sonarHelper.
 ```
 
-### 5. Run the Engine
+### 6. Run the Engine
 
 Run the engine to detect and fix issues in the provided files:
 
@@ -131,7 +148,7 @@ Run the engine to detect and fix issues in the provided files:
 fixes := ruleEngine detectAndFix.
 ```
 
-### 6. Review the Output
+### 7. Review the Output
 
 The engine returns a collection of fixes. Each fix contains the following attributes:
 - **startPos**: Start position of the fix.
@@ -148,6 +165,7 @@ Rules are the core of the Moose-Rule-Engine. A rule has:
 - **Name**: A unique identifier.
 - **Description**: A brief explanation of the rule.
 
+
 #### Example Initialization
 
 ```st
@@ -163,6 +181,30 @@ initialize
 - `fix`: Takes an `MREViolation` and returns a collection of `MREFix`.
 
 A rule must also specify the file extensions it supports. To help with common languages, MooseRuleEngine provides traits such as `TJavaRule` for Java files and `TTypescriptRule` for TypeScript files.
+
+### Preset
+
+A preset is an `MRERulePreset` subclass that defines a named, reusable group of rule classes. A preset may inherit rules from other presets through `parentPresets`.
+
+```st
+Class {
+  #name : 'MyProjectPreset',
+  #superclass : 'MRERulePreset',
+  #category : 'MyProject-Rules',
+  #package : 'MyProject-Rules'
+}
+
+MyProjectPreset class >> presetName
+  ^ 'my-project'
+
+MyProjectPreset class >> parentPresets
+  ^ { MyBasePreset }
+
+MyProjectPreset class >> rules
+  ^ {
+    MyCustomRule.
+    MyAdditionalRule }
+```
 
 ### Helper
 
