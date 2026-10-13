@@ -127,9 +127,8 @@ MooseRuleEngine >> setHelpers: mreHelpers [
 
 { #category : 'initialization' }
 MooseRuleEngine >> setModel: mooseModel [
+
 	model := mooseModel.
-	
-	rules do: [ :rule | rule model: model ].
 ]
 
 { #category : 'initialization' }
@@ -141,8 +140,5 @@ MooseRuleEngine >> setPresets: presetsClass [
 { #category : 'initialization' }
 MooseRuleEngine >> setRules: mreRules [
 
-	rules := mreRules collect: [ :rule | 
-		rule helpers: helpers .
-		rule model: model	
-	]
+	rules := mreRules
 ]
