@@ -100,10 +100,13 @@ MooseRuleEngineTest >> testDetectMixedRuleTypes [
 
 	violations := ruleEngine detect.
 
-	self assert: violations size equals: 2.
-	rules := (violations collect: [ :violation | violation rule ]).
-	self assert: rules first class className equals: rule1 className.
-	self assert: rules last class className equals: javaRule className.
+self assert: violations size equals: 2.
+
+rules := violations collect: [ :violation | violation rule ].
+
+self
+	assert: (rules collect: [ :rule | rule class className ]) asBag
+	equals: { rule1 className. javaRule className } asBag
 ]
 
 { #category : 'tests' }
