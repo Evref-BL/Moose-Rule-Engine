@@ -1,0 +1,20 @@
+README.md
+  s_e7892462b98cbe::t_7b9eb8e2cda822 19,30,78,110,113-129,143,151,168,185-206,208
+  s_e7892462b98cbe::t_9a065bf3f6a836 207
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "1ce2522f40a03beccb5ba6a07007f3e4a2fce6dd",
+  "prompts": {},
+  "sessions": {
+    "s_e7892462b98cbe": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1355e-9cee-7fb2-a921-fa35107c9e37",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "Kilian B <60846047+knowbased@users.noreply.github.com>"
+    }
+  }
+}
