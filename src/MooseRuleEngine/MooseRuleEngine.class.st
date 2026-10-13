@@ -138,9 +138,9 @@ MooseRuleEngine >> setModel: mooseModel [
 ]
 
 { #category : 'initialization' }
-MooseRuleEngine >> setPresets: presetsClass [
+MooseRuleEngine >> setPresets: presetClasses [
 
-	presets := presetsClass
+	presets := presetClasses
 ]
 
 { #category : 'initialization' }
