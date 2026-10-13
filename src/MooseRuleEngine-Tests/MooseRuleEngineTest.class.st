@@ -45,6 +45,17 @@ MooseRuleEngineTest >> testAddHelper [
 ]
 
 { #category : 'tests' }
+MooseRuleEngineTest >> testAddPreset [
+
+	| preset |
+	preset := MRERulePreset new.
+
+	ruleEngine addPreset: preset.
+
+	self assertCollection: ruleEngine presets hasSameElements: { preset }
+]
+
+{ #category : 'tests' }
 MooseRuleEngineTest >> testDetect [
 
 	| violations |
