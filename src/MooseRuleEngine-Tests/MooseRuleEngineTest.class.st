@@ -19,7 +19,7 @@ MooseRuleEngineTest >> setUp [
 
 	super setUp.
 
-	rule1 := RuleMock1 new.
+	rule1 := RuleMock1.
 	ruleEngine := MooseRuleEngine new.
 
 	file1 := MREFile new
@@ -39,9 +39,18 @@ MooseRuleEngineTest >> testAddHelper [
 	ruleEngine setRules: { rule1 }.
 	ruleEngine addHelper: helper.
 
-	self
-		assertCollection: ruleEngine rules first helpers
-		hasSameElements: { helper }
+	self assertCollection: ruleEngine rules hasSameElements: { rule1 }
+]
+
+{ #category : 'tests' }
+MooseRuleEngineTest >> testAddPreset [
+
+	| preset |
+	preset := MRERulePreset new.
+
+	ruleEngine addPreset: preset.
+
+	self assertCollection: ruleEngine presets hasSameElements: { preset }
 ]
 
 { #category : 'tests' }
@@ -65,9 +74,9 @@ MooseRuleEngineTest >> testDetectAndFix [
 	| result |
 	ruleEngine rules: { rule1 }.
 	ruleEngine files: { file1 }.
-	
+
 	result := ruleEngine detectAndFix.
-	
+
 	self assert: result size equals: 1
 ]
 
@@ -83,14 +92,16 @@ MooseRuleEngineTest >> testDetectIgnoresUnsupportedFiles [
 	violations := ruleEngine detect.
 
 	self assert: violations size equals: 1.
-	self assert: violations first rule equals: rule1
+	self
+		assert: violations first rule class className
+		equals: rule1 className
 ]
 
 { #category : 'tests' }
 MooseRuleEngineTest >> testDetectMixedRuleTypes [
 
-	| javaRule violations |
-	javaRule := RuleMockJava new.
+	| javaRule violations rules |
+	javaRule := RuleMockJava.
 	ruleEngine rules: {
 			rule1.
 			javaRule }.
@@ -101,12 +112,14 @@ MooseRuleEngineTest >> testDetectMixedRuleTypes [
 	violations := ruleEngine detect.
 
 	self assert: violations size equals: 2.
+
+	rules := violations collect: [ :violation | violation rule ].
+
 	self
-		assertCollection:
-		(violations collect: [ :violation | violation rule ])
-		hasSameElements: {
-				rule1.
-				javaRule }
+		assert: (rules collect: [ :rule | rule class className ]) asBag
+		equals: {
+				rule1 className.
+				javaRule className } asBag
 ]
 
 { #category : 'tests' }
@@ -133,10 +146,10 @@ MooseRuleEngineTest >> testDetectWithoutRulesOrFiles [
 MooseRuleEngineTest >> testFix [
 
 	| violation1 result |
-	violation1 := MREViolation new rule: rule1.
-	
+	violation1 := MREViolation new rule: rule1 new.
+
 	result := ruleEngine fix: { violation1 }.
-	
+
 	self assert: result size equals: 1.
 	self assert: result first class equals: MRERemediation
 ]
@@ -150,32 +163,24 @@ MooseRuleEngineTest >> testSetFiles [
 
 	self assertCollection: ruleEngine files hasSameElements: {
 			file1.
-			file2 }.
-
+			file2 }
 ]
 
 { #category : 'tests' }
 MooseRuleEngineTest >> testSetHelpers [
 
-	| helper1 helper2 helper3 rule |
+	| helper1 helper2 helper3 |
 	helper1 := MREHelper new.
 	helper2 := MREHelper new.
 
 	helper3 := MREHelper new.
-	
-	rule := MRERule new.
-	
-	ruleEngine setRules: { rule }.
+
 	ruleEngine addHelper: helper1.
 	ruleEngine setHelpers: {
 			helper2.
 			helper3 }.
 
 	self assertCollection: ruleEngine helpers hasSameElements: {
-			helper2.
-			helper3 }.
-	
-	self assertCollection: rule helpers hasSameElements: {
 			helper2.
 			helper3 }
 ]
@@ -185,36 +190,27 @@ MooseRuleEngineTest >> testSetModel [
 
 	| model |
 	model := MooseModel new.
-	
-	ruleEngine setRules: { rule1 }.
 	ruleEngine setModel: model.
-	
-	self assert: ruleEngine model equals: model.
-	self assert: rule1 model equals: model.
+
+	self assert: ruleEngine model equals: model
 ]
 
 { #category : 'tests' }
-MooseRuleEngineTest >> testSetModelSetRuleAfter [
+MooseRuleEngineTest >> testSetPresets [
 
-	| model |
-	model := MooseModel new.
+	| testPresets |
+	testPresets := #( MRETestChildPreset ).
+	ruleEngine setPresets: testPresets.
 
-	ruleEngine setModel: model.	
-	ruleEngine setRules: { rule1 }.
-	
-	self assert: ruleEngine model equals: model.
-	self assert: rule1 model equals: model.
+	self
+		assertCollection: ruleEngine presets
+		hasSameElements: testPresets
 ]
 
 { #category : 'tests' }
 MooseRuleEngineTest >> testSetRules [
 
-	| helper |
-	helper := MREHelper new.
-	ruleEngine setRules: {rule1}.
-	ruleEngine addHelper: helper.
+	ruleEngine setRules: { rule1 }.
 
-	self assertCollection: ruleEngine rules equals: { rule1 }.
-
-	self assertCollection: ruleEngine rules first helpers hasSameElements: { helper }
+	self assertCollection: ruleEngine rules equals: { rule1 }
 ]

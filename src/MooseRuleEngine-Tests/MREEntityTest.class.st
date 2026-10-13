@@ -52,11 +52,16 @@ MREEntityTest >> testStartLine [
 MREEntityTest >> testValue [
 
 	| file entity value |
-	file := MREFile new path: 'test.java'; content: 'aaa bbb'.
-	
-	entity := MREEntity new file: file; startPos: 1; endPos: 3.
-	
+	file := MREFile new
+		        path: 'test.java';
+		        content: 'aaa bbb'.
+
+	entity := MREEntity new
+		          file: file;
+		          startPos: 1;
+		          endPos: 3.
+
 	value := entity value.
-	
-	self assert: value equals: 'aaa'.
+
+	self assert: value equals: 'aaa'
 ]

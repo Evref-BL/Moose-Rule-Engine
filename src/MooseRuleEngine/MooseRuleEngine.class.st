@@ -5,7 +5,8 @@ Class {
 		'rules',
 		'files',
 		'helpers',
-		'model'
+		'model',
+		'presets'
 	],
 	#category : 'MooseRuleEngine',
 	#package : 'MooseRuleEngine'
@@ -14,16 +15,30 @@ Class {
 { #category : 'adding' }
 MooseRuleEngine >> addHelper: helper [
 
-	helpers add: helper.
+	helpers add: helper
+]
+
+{ #category : 'adding' }
+MooseRuleEngine >> addPreset: preset [
+
+	presets add: preset
 ]
 
 { #category : 'as yet unclassified' }
 MooseRuleEngine >> detect [
 
-	| violations |
-	violations := rules collect: [ :rule |
-		              (files select: [ :file | rule appliesToFile: file ])
-			              collect: [ :file | rule analyse: file ] ].
+	| violations allRules allRulesClasses |
+	allRulesClasses := MRERulePresetResolver new
+		                   resolveWithPresets: presets
+		                   andRules: rules.
+	allRules := allRulesClasses collect: [ :ruleClass |
+			            | rule |
+			            rule := ruleClass new.
+			            rule helpers: helpers ].
+
+	violations := allRules collect: [ :rule |
+			              (files select: [ :file | rule appliesToFile: file ])
+				              collect: [ :file | rule analyse: file ] ].
 
 	^ violations flattened
 ]
@@ -52,11 +67,12 @@ MooseRuleEngine >> files: anObject [
 { #category : 'fix - static' }
 MooseRuleEngine >> fix: violations [
 
-	^violations collect: [ :violation |
-		| fixes |
-		fixes := violation rule fix: violation.
-		MRERemediation new violation: violation; fixes: fixes.
-	 ]
+	^ violations collect: [ :violation |
+			  | fixes |
+			  fixes := violation rule fix: violation.
+			  MRERemediation new
+				  violation: violation;
+				  fixes: fixes ]
 ]
 
 { #category : 'accessing' }
@@ -68,19 +84,29 @@ MooseRuleEngine >> helpers [
 { #category : 'initialization' }
 MooseRuleEngine >> initialize [
 
+	super initialize.
 	rules := OrderedCollection new.
+	presets := OrderedCollection new.
 	files := OrderedCollection new.
-	helpers := OrderedCollection new.
+	helpers := OrderedCollection new
 ]
 
 { #category : 'accessing' }
 MooseRuleEngine >> model [
-	^model
+
+	^ model
 ]
 
 { #category : 'accessing' }
 MooseRuleEngine >> model: aModel [
-	model := aModel 
+
+	model := aModel
+]
+
+{ #category : 'accessing' }
+MooseRuleEngine >> presets [
+
+	^ presets
 ]
 
 { #category : 'accessing' }
@@ -98,7 +124,7 @@ MooseRuleEngine >> rules: anObject [
 { #category : 'initialization' }
 MooseRuleEngine >> setFiles: mreFiles [
 
-	files := mreFiles 
+	files := mreFiles
 ]
 
 { #category : 'initialization' }
@@ -110,16 +136,18 @@ MooseRuleEngine >> setHelpers: mreHelpers [
 
 { #category : 'initialization' }
 MooseRuleEngine >> setModel: mooseModel [
-	model := mooseModel.
-	
-	rules do: [ :rule | rule model: model ].
+
+	model := mooseModel
+]
+
+{ #category : 'initialization' }
+MooseRuleEngine >> setPresets: presetClasses [
+
+	presets := presetClasses
 ]
 
 { #category : 'initialization' }
 MooseRuleEngine >> setRules: mreRules [
 
-	rules := mreRules collect: [ :rule | 
-		rule helpers: helpers .
-		rule model: model	
-	]
+	rules := mreRules
 ]

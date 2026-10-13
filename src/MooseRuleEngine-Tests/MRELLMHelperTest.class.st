@@ -110,8 +110,8 @@ MRELLMHelperTest >> testFix [
 	violation := MREViolation new
 		             rule: rule;
 		             addEntity: entity.
-		
-	(llmApi stub performRequest) willReturn: '``` test ```'.
+
+	llmApi stub performRequest willReturn: '``` test ```'.
 	fixes := helper fix: violation.
 
 	self assert: fixes size equals: 1.

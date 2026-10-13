@@ -11,6 +11,7 @@ Class {
 
 { #category : 'adding' }
 MREViolation >> addEntity: entity [
+
 	entities add: entity
 ]
 
@@ -21,8 +22,9 @@ MREViolation >> entities [
 ]
 
 { #category : 'initialization' }
-MREViolation >> initialize [ 
-	entities := OrderedCollection new.
+MREViolation >> initialize [
+
+	entities := OrderedCollection new
 ]
 
 { #category : 'accessing' }
