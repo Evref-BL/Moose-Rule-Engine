@@ -21,11 +21,18 @@ MooseRuleEngine >> addHelper: helper [
 { #category : 'as yet unclassified' }
 MooseRuleEngine >> detect [
 
-	| violations allRules |
-	allRules := MRERulePresetResolver new resolveWithPresets: presets andRules: rules.
+	| violations allRules allRulesClasses |
+	allRulesClasses := MRERulePresetResolver new
+		                   resolveWithPresets: presets
+		                   andRules: rules.
+	allRules := allRulesClasses collect: [ :ruleClass |
+			            | rule |
+			            rule := ruleClass new.
+			            rule helpers: helpers ].
+
 	violations := allRules collect: [ :rule |
-		              (files select: [ :file | rule appliesToFile: file ])
-			              collect: [ :file | rule analyse: file ] ].
+			              (files select: [ :file | rule appliesToFile: file ])
+				              collect: [ :file | rule analyse: file ] ].
 
 	^ violations flattened
 ]
