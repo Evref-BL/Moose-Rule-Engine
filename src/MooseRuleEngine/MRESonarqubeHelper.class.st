@@ -16,8 +16,10 @@ Class {
 MRESonarqubeHelper >> allViolationsOf: rule inFile: file usingRuleId: ruleId [
 
 	| params issues filePath |
-	filePath := sourcePath ifNotNil: [ file path removePrefix: (sourcePath, '/') ]ifNil: [ file path ].
-	
+	filePath := sourcePath
+		            ifNotNil: [ file path removePrefix: sourcePath , '/' ]
+		            ifNil: [ file path ].
+
 	params := {
 		          (#componentKeys -> (projectKey , ':' , filePath)).
 		          (#rules -> ruleId) } asDictionary.
@@ -53,13 +55,13 @@ MRESonarqubeHelper >> parseIssueIntoViolation: issue ofRule: rule inFile: file [
 
 	flows := issue at: #flows.
 	flows ifNotEmpty: [
-		flows do: [ :flow |
-			| location |
-			location := (flow at: #locations) first.
-			textRange := location at: #textRange.
-			violation addEntity:
-				(self parseTextRangeIntoEntity: textRange ofFile: file) ] ].
-		
+			flows do: [ :flow |
+					| location |
+					location := (flow at: #locations) first.
+					textRange := location at: #textRange.
+					violation addEntity:
+						(self parseTextRangeIntoEntity: textRange ofFile: file) ] ].
+
 	violation rule description: (issue at: #message).
 
 	^ violation
@@ -131,13 +133,11 @@ MRESonarqubeHelper >> violationsInMergeRequestOf: rule inFile: file usingRuleId:
 MRESonarqubeHelper >> violationsOf: rule inFile: file usingRuleId: ruleId [
 
 	type = 'mergeRequest' ifTrue: [
-		^ self
-			  violationsInMergeRequestOf: rule
-			  inFile: file
-			  usingRuleId: ruleId ].
-		
-	type = 'all' ifTrue: [ 
-		
-		^self allViolationsOf: rule inFile: file usingRuleId: ruleId.	
-	]
+			^ self
+				  violationsInMergeRequestOf: rule
+				  inFile: file
+				  usingRuleId: ruleId ].
+
+	type = 'all' ifTrue: [
+		^ self allViolationsOf: rule inFile: file usingRuleId: ruleId ]
 ]

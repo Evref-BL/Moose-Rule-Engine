@@ -14,8 +14,8 @@ Class {
 { #category : 'running' }
 MRERule >> analyse: file [
 	"take a MREFile and return an Collection of MREViolation"
-	
-	^self subclassResponsibility 
+
+	^ self subclassResponsibility
 ]
 
 { #category : 'testing' }
@@ -40,16 +40,15 @@ MRERule >> description: anObject [
 { #category : 'running' }
 MRERule >> fix: violation [
 	"take a MREViolation and return a collection of MREFix"
-	
-	^self subclassResponsibility 
+
+	^ self subclassResponsibility
 ]
 
 { #category : 'as yet unclassified' }
 MRERule >> getHelper: helperName [
 
 	^ helpers
-		  detect: [ :helper |
-			  helper name = helperName ]
+		  detect: [ :helper | helper name = helperName ]
 		  ifFound: [ :helper | helper ]
 		  ifNone: [ nil ]
 ]
@@ -67,8 +66,9 @@ MRERule >> helpers: anObject [
 ]
 
 { #category : 'initialization' }
-MRERule >> initialize [ 
-helpers := OrderedCollection new.
+MRERule >> initialize [
+
+	helpers := OrderedCollection new
 ]
 
 { #category : 'accessing' }

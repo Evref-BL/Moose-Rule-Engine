@@ -11,6 +11,7 @@ Class {
 
 { #category : 'adding' }
 MRERemediation >> addFix: fix [
+
 	fixes push: fix
 ]
 
@@ -28,16 +29,16 @@ MRERemediation >> fixes: anObject [
 
 { #category : 'testing' }
 MRERemediation >> hasConflictWith: otherRemediation [
-	 ^ fixes anySatisfy: [:fix1 |
-        otherRemediation fixes anySatisfy: [:fix2 |
-            fix1 hasConflictWith: fix2
-        ]
-    ]
+
+	^ fixes anySatisfy: [ :fix1 |
+			  otherRemediation fixes anySatisfy: [ :fix2 |
+				  fix1 hasConflictWith: fix2 ] ]
 ]
 
 { #category : 'initialization' }
-MRERemediation >> initialize [ 
-	fixes := {  }.
+MRERemediation >> initialize [
+
+	fixes := {  }
 ]
 
 { #category : 'accessing' }

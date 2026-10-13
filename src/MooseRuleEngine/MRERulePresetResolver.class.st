@@ -15,7 +15,7 @@ Class {
 MRERulePresetResolver >> initialize [
 
 	super initialize.
-	resolvingPresetNames := OrderedCollection new.
+	resolvingPresetNames := OrderedCollection new
 ]
 
 { #category : 'as yet unclassified' }

@@ -7,5 +7,6 @@ Class {
 
 { #category : 'accessing' }
 MREHelper >> name [
-	^self subclassResponsibility 
+
+	^ self subclassResponsibility
 ]
