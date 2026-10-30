@@ -1,0 +1,19 @@
+.smalltalk.ston
+  s_2f26a0fa169960::t_eae47013bd1fff 7,18
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.15",
+  "base_commit_sha": "2def532aefaf261eda90b4da904e23695ebb7af1",
+  "prompts": {},
+  "sessions": {
+    "s_2f26a0fa169960": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f8f71-d80e-7042-9c2d-36b8c67d9a1f",
+        "model": "gpt-5.5"
+      },
+      "human_author": "Kilian B <60846047+knowbased@users.noreply.github.com>"
+    }
+  }
+}

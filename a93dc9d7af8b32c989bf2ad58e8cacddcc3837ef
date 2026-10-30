@@ -1,0 +1,22 @@
+README.md
+  s_2f26a0fa169960::t_45437ad622e094 38,44,49,55,62,70
+  s_2f26a0fa169960::t_ad06d03aef7833 47-48,50-54
+  s_2f26a0fa169960::t_c0a7bdeb838060 45-46
+  s_2f26a0fa169960::t_6e2401970f4356 71
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.15",
+  "base_commit_sha": "a93dc9d7af8b32c989bf2ad58e8cacddcc3837ef",
+  "prompts": {},
+  "sessions": {
+    "s_2f26a0fa169960": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f8f71-d80e-7042-9c2d-36b8c67d9a1f",
+        "model": "gpt-5.5"
+      },
+      "human_author": "Kilian B <60846047+knowbased@users.noreply.github.com>"
+    }
+  }
+}
