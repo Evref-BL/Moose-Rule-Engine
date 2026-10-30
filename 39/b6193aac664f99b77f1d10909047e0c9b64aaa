@@ -1,0 +1,21 @@
+src/MooseRuleEngine-Tests/MRERulePresetResolverTest.class.st
+  s_15752cba02c73a::t_7fc17c66e8b307 43-57
+src/MooseRuleEngine/MRERulePresetResolver.class.st
+  s_15752cba02c73a::t_09cb3b3fa20b14 24,27-32,35-36
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "39b6193aac664f99b77f1d10909047e0c9b64aaa",
+  "prompts": {},
+  "sessions": {
+    "s_15752cba02c73a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b6452d74-c218-4748-98da-264a845cf00e",
+        "model": "unknown"
+      },
+      "human_author": "Kilian B <60846047+knowbased@users.noreply.github.com>"
+    }
+  }
+}
