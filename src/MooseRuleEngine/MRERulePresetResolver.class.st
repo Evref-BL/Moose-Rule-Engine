@@ -21,17 +21,19 @@ MRERulePresetResolver >> initialize [
 { #category : 'as yet unclassified' }
 MRERulePresetResolver >> resolveWithPresets: presets andRules: rules [
 
-	| presetsRules presetsRulesClasses prese |
+	| presetsRules |
 	presetsRules := presets flatCollectAsSet: [ :preset |
 			                (resolvingPresetNames includes: preset) ifTrue: [
-					                self error: 'Cyclic preset inheritance: '
-						                ,
-						                (' -> ' join:
-							                 resolvingPresetNames , { preset presetName }) ].
-			                resolvingPresetNames add: preset.
+					                self error:
+						                'Cyclic preset inheritance: ' , (' -> ' join:
+							                 ((resolvingPresetNames copyWith: preset)
+								                  collect: [ :each | each presetName ])) ].
+			                resolvingPresetNames addLast: preset.
+			                [
 			                self
 				                resolveWithPresets: preset parentPresets
-				                andRules: preset rules ].
+				                andRules: preset rules ] ensure: [
+				                resolvingPresetNames removeLast ] ].
 
 	presetsRules addAll: rules.
 
