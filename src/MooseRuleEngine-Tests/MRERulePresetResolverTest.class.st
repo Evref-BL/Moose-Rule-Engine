@@ -40,3 +40,18 @@ MRERulePresetResolverTest >> testResolveWithPresetsAndRulesCyclicParent [
 					andRules: testRules ]
 		raise: Error
 ]
+
+{ #category : 'tests' }
+MRERulePresetResolverTest >> testResolveWithPresetsAndRulesSharedParent [
+
+	| resolvedRules |
+	resolvedRules := MRERulePresetResolver new
+		                 resolveWithPresets: {
+				                 MRETestChildPreset.
+				                 MRETestParentPreset }
+		                 andRules: {  }.
+
+	self assertCollection: resolvedRules hasSameElements: {
+			MRETestRuleOne.
+			MRETestRuleTwo }
+]
