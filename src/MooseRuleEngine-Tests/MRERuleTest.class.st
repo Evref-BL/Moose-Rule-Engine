@@ -8,6 +8,22 @@ Class {
 	#package : 'MooseRuleEngine-Tests'
 }
 
+{ #category : 'utilities' }
+MRERuleTest >> entityFrom: start to: end [
+
+	^ MREEntity new
+		  startPos: start;
+		  endPos: end
+]
+
+{ #category : 'utilities' }
+MRERuleTest >> fileWith: content [
+
+	^ MREFile new
+		  path: 'test.java';
+		  content: content
+]
+
 { #category : 'tests' }
 MRERuleTest >> testDoesNotApplyWithoutSupportedExtensions [
 
@@ -31,4 +47,10 @@ MRERuleTest >> testGetHelper [
 	helper := rule getHelper: 'sonarqube'.
 
 	self assert: helper class equals: MRESonarqubeHelper
+]
+
+{ #category : 'tests - text' }
+MRERuleTest >> testSourceOfIn [
+
+	self assert: (MRERule new sourceOf: (self entityFrom: 2 to: 4) in: (self fileWith: 'abcdef')) equals: 'bcd'
 ]

@@ -95,6 +95,13 @@ MRERule >> name: anObject [
 	name := anObject
 ]
 
+{ #category : 'utilities - fix' }
+MRERule >> sourceOf: entity in: file [
+	"The source text covered by an entity of the file: a violation entity, a model entity or a fix."
+
+	^ file content copyFrom: entity startPos to: entity endPos
+]
+
 { #category : 'accessing' }
 MRERule >> supportedExtensions [
 
