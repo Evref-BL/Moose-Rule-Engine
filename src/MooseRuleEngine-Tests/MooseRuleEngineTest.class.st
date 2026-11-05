@@ -181,10 +181,36 @@ MooseRuleEngineTest >> testFixKeepsTheStackOfAFixThatRaises [
 	failure := ruleEngine fixErrors first.
 	self assert: failure violation equals: violation.
 	self assert: failure stack sender method equals: RuleMockFixError >> #fix:.
-	self should: [ failure replay ] raise: Error.
+	self assert: failure stack sender sender isNil.
 	self
 		assert: failure description
 		equals: 'RuleMockFixError fix: failed on test.ts at 1: Error: no node at this position'
+]
+
+{ #category : 'tests' }
+MooseRuleEngineTest >> testFuelOutAFixFailureWithoutItsSecrets [
+
+	| violation file stack |
+	violation := RuleMockFixError new analyse: file1.
+	violation rule name: 'secret-token'.
+	ruleEngine fix: { violation }.
+	file := FileLocator temp / 'MooseRuleEngineTest.fuel'.
+
+	[
+	ruleEngine fixErrors first
+		fuelOutTo: file
+		redacting: { 'secret-token' }.
+	stack := [
+	         FLMaterializer materializeFromFileNamed: file fullName.
+	         nil ]
+		         on: FLDebuggerStackMaterialization
+		         do: [ :materialization |
+		         materialization instVarNamed: #interruptedContext ] ]
+		ensure: [ file ensureDelete ].
+
+	self assert: stack sender method equals: RuleMockFixError >> #fix:.
+	self deny: stack sender receiver identicalTo: violation rule.
+	self assert: stack sender receiver name equals: '<redacted>'
 ]
 
 { #category : 'tests' }
