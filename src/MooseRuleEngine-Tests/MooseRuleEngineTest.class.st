@@ -181,6 +181,7 @@ MooseRuleEngineTest >> testFixKeepsTheStackOfAFixThatRaises [
 	failure := ruleEngine fixErrors first.
 	self assert: failure violation equals: violation.
 	self assert: failure stack sender method equals: RuleMockFixError >> #fix:.
+	self should: [ failure replay ] raise: Error.
 	self
 		assert: failure description
 		equals: 'RuleMockFixError fix: failed on test.ts at 1: Error: no node at this position'
