@@ -1,0 +1,25 @@
+src/MooseRuleEngine-Tests/MooseRuleEngineTest.class.st
+  s_444e91e7ac989d::t_cf9398010bad1f 83-98,173-188
+src/MooseRuleEngine-Tests/RuleMockFixError.class.st
+  s_444e91e7ac989d::t_b6c7baceddebb0 1-34
+src/MooseRuleEngine/MREFixFailure.class.st
+  s_444e91e7ac989d::t_14ec8f5917060c 1-68
+src/MooseRuleEngine/MooseRuleEngine.class.st
+  s_444e91e7ac989d::t_3e3ef081e2cda3 9-10,70-88,90,106-107
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "696a661bb20aa0a49a3f7c1a5d9cd1f245113dbd",
+  "prompts": {},
+  "sessions": {
+    "s_444e91e7ac989d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "3feadc74-4958-477b-b4ff-d2f041d72172",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Kilian B <60846047+knowbased@users.noreply.github.com>"
+    }
+  }
+}
