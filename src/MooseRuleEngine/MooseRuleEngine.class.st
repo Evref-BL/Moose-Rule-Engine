@@ -6,7 +6,8 @@ Class {
 		'files',
 		'helpers',
 		'model',
-		'presets'
+		'presets',
+		'fixErrors'
 	],
 	#category : 'MooseRuleEngine',
 	#package : 'MooseRuleEngine'
@@ -66,13 +67,27 @@ MooseRuleEngine >> files: anObject [
 
 { #category : 'fix - static' }
 MooseRuleEngine >> fix: violations [
+	"A rule that raises in fix: loses its violation, not the run: the error is kept in fixErrors"
 
-	^ violations collect: [ :violation |
-			  | fixes |
-			  fixes := violation rule fix: violation.
-			  MRERemediation new
-				  violation: violation;
-				  fixes: fixes ]
+	^ violations
+		  collect: [ :violation |
+				  [
+				  MRERemediation new
+					  violation: violation;
+					  fixes: (violation rule fix: violation) ]
+					  on: Error
+					  do: [ :error |
+							  fixErrors add:
+								  (MREFixFailure violation: violation error: error).
+							  nil ] ]
+		  thenReject: [ :remediation | remediation isNil ]
+]
+
+{ #category : 'accessing' }
+MooseRuleEngine >> fixErrors [
+	"The MREFixFailure of each violation whose rule raised in fix:, left out of the remediations"
+
+	^ fixErrors
 ]
 
 { #category : 'accessing' }
@@ -88,7 +103,8 @@ MooseRuleEngine >> initialize [
 	rules := OrderedCollection new.
 	presets := OrderedCollection new.
 	files := OrderedCollection new.
-	helpers := OrderedCollection new
+	helpers := OrderedCollection new.
+	fixErrors := OrderedCollection new
 ]
 
 { #category : 'accessing' }

@@ -81,6 +81,22 @@ MooseRuleEngineTest >> testDetectAndFix [
 ]
 
 { #category : 'tests' }
+MooseRuleEngineTest >> testDetectAndFixKeepsTheOtherRemediationsWhenAFixRaises [
+
+	| remediations |
+	ruleEngine rules: {
+			rule1.
+			RuleMockFixError }.
+	ruleEngine files: { file1 }.
+
+	remediations := ruleEngine detectAndFix.
+
+	self assert: remediations size equals: 1.
+	self assert: remediations first violation rule class equals: rule1.
+	self assert: ruleEngine fixErrors size equals: 1
+]
+
+{ #category : 'tests' }
 MooseRuleEngineTest >> testDetectIgnoresUnsupportedFiles [
 
 	| violations |
@@ -152,6 +168,22 @@ MooseRuleEngineTest >> testFix [
 
 	self assert: result size equals: 1.
 	self assert: result first class equals: MRERemediation
+]
+
+{ #category : 'tests' }
+MooseRuleEngineTest >> testFixKeepsTheStackOfAFixThatRaises [
+
+	| violation failure |
+	violation := RuleMockFixError new analyse: file1.
+
+	self assert: (ruleEngine fix: { violation }) isEmpty.
+
+	failure := ruleEngine fixErrors first.
+	self assert: failure violation equals: violation.
+	self assert: failure stack sender method equals: RuleMockFixError >> #fix:.
+	self
+		assert: failure description
+		equals: 'RuleMockFixError fix: failed on test.ts at 1: Error: no node at this position'
 ]
 
 { #category : 'tests' }
