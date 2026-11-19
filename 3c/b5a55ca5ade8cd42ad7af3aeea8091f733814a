@@ -1,0 +1,21 @@
+src/MooseRuleEngine/MRESonarqubeHelper.class.st
+  s_cbd4f54212060a::t_562c20ebe3cff7 142-146
+src/MooseRuleEngine-Tests/MRESonarqubeHelperTest.class.st
+  s_cbd4f54212060a::t_562c20ebe3cff7 374-393
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "3cb5a55ca5ade8cd42ad7af3aeea8091f733814a",
+  "prompts": {},
+  "sessions": {
+    "s_cbd4f54212060a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "7f0b6ddb-389a-4797-bbf4-0c935d72263e",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Kilian B <60846047+knowbased@users.noreply.github.com>"
+    }
+  }
+}
