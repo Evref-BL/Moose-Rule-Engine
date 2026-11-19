@@ -139,5 +139,9 @@ MRESonarqubeHelper >> violationsOf: rule inFile: file usingRuleId: ruleId [
 				  usingRuleId: ruleId ].
 
 	type = 'all' ifTrue: [
-		^ self allViolationsOf: rule inFile: file usingRuleId: ruleId ]
+		^ self allViolationsOf: rule inFile: file usingRuleId: ruleId ].
+
+	self error:
+		('Unknown SonarQube analyse type: {1} (expected ''all'' or ''mergeRequest'')'
+			 format: { type printString })
 ]

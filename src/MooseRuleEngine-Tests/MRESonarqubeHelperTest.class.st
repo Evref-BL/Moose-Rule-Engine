@@ -371,3 +371,23 @@ MRESonarqubeHelperTest >> testViolationsOfInFileUsingRuleIdIfAll [
 		assertCollection: violations first entities
 		hasSameElements: { entity }
 ]
+
+{ #category : 'tests' }
+MRESonarqubeHelperTest >> testViolationsOfInFileUsingRuleIdSignalsAnUnknownType [
+
+	| helper |
+	helper := MRESonarqubeHelper new type: 'newCode'.
+
+	self
+		should: [
+				helper
+					violationsOf: MRERule new
+					inFile: (MREFile new path: 'test.ts')
+					usingRuleId: 'typescript:S1128' ]
+		raise: Error
+		withExceptionDo: [ :error |
+				self
+					assert: error messageText
+					equals:
+					'Unknown SonarQube analyse type: ''newCode'' (expected ''all'' or ''mergeRequest'')' ]
+]
